@@ -2,6 +2,7 @@ import { Link } from "lib/transition"
 
 import { PageRoutes } from "@/lib/pageroutes"
 import { buttonVariants } from "@/components/ui/button"
+import { LuArrowUpRight } from "react-icons/lu"
 
 export default function Home() {
   return (
@@ -17,6 +18,14 @@ export default function Home() {
           className={buttonVariants({ className: "px-6", size: "lg" })}
         >
           Get Started
+        </Link>
+        <Link
+          href="https://pypi.org/project/taizun/"
+          className={buttonVariants({ variant: "outline", className: "px-6", size: "lg" })}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Visit PyPI <LuArrowUpRight className="ml-2 h-4 w-4" />
         </Link>
       </div>
     </section>

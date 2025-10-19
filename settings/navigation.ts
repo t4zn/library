@@ -6,8 +6,9 @@ export const Navigations = [
     href: `/docs${PageRoutes[0].href}`,
   },
   {
-    title: "Features",
-    href: "/docs/nlp", // Link to the first feature section
+    title: "PyPI",
+    href: "https://pypi.org/project/taizun/",
+    external: true,
   },
 ]
 
