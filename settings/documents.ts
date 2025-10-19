@@ -50,35 +50,9 @@ export const Documents: Paths[] = [
     spacer: true,
   },
   {
-    title: "Natural Language Processing",
-    href: "/nlp",
-    heading: "Features",
-    items: [
-      {
-        title: "Text Summarization",
-        href: "/summarize",
-      },
-      {
-        title: "Sentiment Analysis",
-        href: "/moodscan",
-      },
-      {
-        title: "Named Entity Recognition",
-        href: "/labels",
-      },
-      {
-        title: "Remove Stopwords",
-        href: "/scrub",
-      },
-      {
-        title: "Word Frequency Analysis",
-        href: "/wordcount",
-      },
-    ],
-  },
-  {
     title: "Computer Vision",
     href: "/computer-vision",
+    heading: "Features",
     items: [
       {
         title: "Generate Image Caption",
@@ -99,6 +73,32 @@ export const Documents: Paths[] = [
       {
         title: "Convert to Grayscale",
         href: "/grayscale",
+      },
+    ],
+  },
+  {
+    title: "NLP",
+    href: "/nlp",
+    items: [
+      {
+        title: "Text Summarization",
+        href: "/summarize",
+      },
+      {
+        title: "Sentiment Analysis",
+        href: "/moodscan",
+      },
+      {
+        title: "Named Entity Recognition",
+        href: "/labels",
+      },
+      {
+        title: "Remove Stopwords",
+        href: "/scrub",
+      },
+      {
+        title: "Word Frequency Analysis",
+        href: "/wordcount",
       },
     ],
   },
