@@ -7,12 +7,15 @@ import { LuArrowUpRight } from "react-icons/lu"
 export default function Home() {
   return (
     <section className="flex min-h-[86.5vh] flex-col items-center justify-center px-2 py-8 text-center">
-      <h1 className="mb-4 text-4xl font-bold sm:text-7xl">Taizun</h1>
+      <div className="flex items-center justify-center mb-4">
+        <img src="/logo.svg" alt="Taizun Logo" className="h-12 w-12 mr-4 sm:h-16 sm:w-16" />
+        <h1 className="text-4xl font-bold sm:text-7xl">Taizun</h1>
+      </div>
       <p className="text-foreground mb-8 max-w-[600px] sm:text-base">
         A Python library that simplifies machine learning tasks.
       </p>
 
-      <div className="flex items-center gap-5">
+      <div className="flex flex-col items-center gap-4">
         <Link
           href={`/docs${PageRoutes[0].href}`}
           className={buttonVariants({ className: "px-6", size: "lg" })}
