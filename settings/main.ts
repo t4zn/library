@@ -20,7 +20,7 @@ export const urlimage = "/images/og-image.png"
 export const imagealt = "Taizun - Machine Learning Library"
 export const twitterhandle = "@t4zn"
 
-export const companyname = "t4zn"
+export const companyname = "Taizun"
 export const companylink = "https://github.com/t4zn/taizun"
 
 export const branding = true
