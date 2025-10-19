@@ -64,3 +64,329 @@ def convert_to_int(s):
         result = result * 10 + (ord(char) - ord('0'))
     return result
 ```
+
+## Real-World Example
+
+Data processing systems and user interface applications use string-to-integer conversion to handle user input, parse configuration files, and process numerical data in various business and technical contexts:
+
+```python
+from taizun import convert_to_int
+
+# User input validation for forms
+def validate_age_input(user_inputs):
+    """
+    Validate and convert age inputs from user forms
+    """
+    results = []
+    
+    for user_input in user_inputs:
+        try:
+            # Convert string to integer
+            age = convert_to_int(user_input['age'])
+            
+            # Validate age range
+            if 0 <= age <= 150:
+                validation_status = "Valid"
+                category = "Adult" if age >= 18 else "Minor"
+            else:
+                validation_status = "Invalid - Age out of range"
+                category = "N/A"
+            
+            results.append({
+                "user_id": user_input['user_id'],
+                "input_age": user_input['age'],
+                "converted_age": age,
+                "validation": validation_status,
+                "category": category
+            })
+            
+        except ValueError:
+            results.append({
+                "user_id": user_input['user_id'],
+                "input_age": user_input['age'],
+                "converted_age": None,
+                "validation": "Invalid - Not a number",
+                "category": "N/A"
+            })
+    
+    return results
+
+# Example user age inputs
+user_inputs = [
+    {"user_id": 1, "age": "25"},
+    {"user_id": 2, "age": "17"},
+    {"user_id": 3, "age": "abc"},  # Invalid input
+    {"user_id": 4, "age": "200"},  # Out of range
+    {"user_id": 5, "age": "35"}
+]
+
+age_validations = validate_age_input(user_inputs)
+
+print("Age Input Validation:")
+print("=" * 19)
+for result in age_validations:
+    print(f"User {result['user_id']}:")
+    print(f"  Input: '{result['input_age']}'")
+    print(f"  Converted: {result['converted_age']}")
+    print(f"  Status: {result['validation']}")
+    if result['category'] != "N/A":
+        print(f"  Category: {result['category']}")
+    print()
+
+# Configuration file parser
+def parse_config_settings(config_lines):
+    """
+    Parse configuration settings that contain integer values
+    """
+    settings = {}
+    
+    for line in config_lines:
+        # Skip comments and empty lines
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+            
+        # Split on '=' to separate key and value
+        if "=" in line:
+            key, value = line.split("=", 1)
+            key = key.strip()
+            value = value.strip()
+            
+            # Try to convert numeric values to integers
+            try:
+                # Check if the value is numeric
+                if value.isdigit() or (value.startswith("-") and value[1:].isdigit()):
+                    settings[key] = convert_to_int(value)
+                else:
+                    settings[key] = value  # Keep as string
+            except ValueError:
+                settings[key] = value  # Keep as string if conversion fails
+    
+    return settings
+
+# Example configuration file content
+config_content = [
+    "# Server configuration",
+    "port = 8080",
+    "max_connections = 1000",
+    "timeout = 30",
+    "debug_mode = false",
+    "log_level = info",
+    "# Database settings",
+    "db_port = 5432",
+    "pool_size = 20"
+]
+
+parsed_settings = parse_config_settings(config_content)
+
+print("Configuration File Parsing:")
+print("=" * 24)
+print("Parsed settings:")
+for key, value in parsed_settings.items():
+    value_type = type(value).__name__
+    print(f"  {key}: {value} ({value_type})")
+
+# Data analysis from CSV files
+def process_sales_data(csv_rows):
+    """
+    Process sales data from CSV rows with integer quantities and prices
+    """
+    processed_data = []
+    total_revenue = 0
+    
+    for row in csv_rows:
+        # Split CSV row into fields
+        fields = row.split(",")
+        
+        if len(fields) >= 4:
+            product = fields[0].strip()
+            quantity_str = fields[1].strip()
+            price_str = fields[2].strip()
+            discount_str = fields[3].strip()
+            
+            try:
+                # Convert string values to integers
+                quantity = convert_to_int(quantity_str)
+                price = convert_to_int(price_str)
+                discount = convert_to_int(discount_str)
+                
+                # Calculate revenue
+                revenue = quantity * price * (1 - discount / 100.0)
+                total_revenue += revenue
+                
+                processed_data.append({
+                    "product": product,
+                    "quantity": quantity,
+                    "price": price,
+                    "discount": discount,
+                    "revenue": round(revenue, 2)
+                })
+                
+            except ValueError:
+                processed_data.append({
+                    "product": product,
+                    "error": f"Invalid data: qty='{quantity_str}', price='{price_str}', discount='{discount_str}'"
+                })
+    
+    return {
+        "processed_data": processed_data,
+        "total_revenue": round(total_revenue, 2)
+    }
+
+# Example sales data CSV rows
+sales_data = [
+    "Laptop,5,1200,10",
+    "Mouse,50,25,5",
+    "Keyboard,30,75,0",
+    "Monitor,15,300,15",
+    "Webcam,25,80,abc"  # Invalid discount
+]
+
+sales_analysis = process_sales_data(sales_data)
+
+print("\nSales Data Processing:")
+print("=" * 21)
+print("Processed products:")
+for item in sales_analysis['processed_data']:
+    if 'error' in item:
+        print(f"  {item['product']}: {item['error']}")
+    else:
+        print(f"  {item['product']}:")
+        print(f"    Quantity: {item['quantity']}")
+        print(f"    Price: ${item['price']}")
+        print(f"    Discount: {item['discount']}%")
+        print(f"    Revenue: ${item['revenue']}")
+
+print(f"\nTotal Revenue: ${sales_analysis['total_revenue']}")
+
+# Sensor data processing
+def process_sensor_readings(readings):
+    """
+    Process sensor readings that come as string values
+    """
+    processed_readings = []
+    
+    for reading in readings:
+        sensor_id = reading['sensor_id']
+        value_str = reading['value']
+        timestamp = reading['timestamp']
+        
+        try:
+            # Convert sensor value to integer
+            sensor_value = convert_to_int(value_str)
+            
+            # Apply sensor-specific processing
+            if sensor_id.startswith("TEMP"):
+                # Temperature sensor (value in tenths of degrees)
+                actual_temp = sensor_value / 10.0
+                status = "Normal" if 15 <= actual_temp <= 35 else "Alert"
+            elif sensor_id.startswith("HUMID"):
+                # Humidity sensor
+                status = "Normal" if 30 <= sensor_value <= 70 else "Alert"
+            else:
+                # Other sensors
+                status = "OK"
+            
+            processed_readings.append({
+                "sensor_id": sensor_id,
+                "raw_value": sensor_value,
+                "processed_value": actual_temp if sensor_id.startswith("TEMP") else sensor_value,
+                "timestamp": timestamp,
+                "status": status
+            })
+            
+        except ValueError:
+            processed_readings.append({
+                "sensor_id": sensor_id,
+                "error": f"Invalid reading: '{value_str}'",
+                "timestamp": timestamp,
+                "status": "Error"
+            })
+    
+    return processed_readings
+
+# Example sensor readings
+sensor_readings = [
+    {"sensor_id": "TEMP_001", "value": "250", "timestamp": "2023-10-15T10:30:00"},
+    {"sensor_id": "HUMID_001", "value": "45", "timestamp": "2023-10-15T10:30:00"},
+    {"sensor_id": "PRESS_001", "value": "1013", "timestamp": "2023-10-15T10:30:00"},
+    {"sensor_id": "TEMP_002", "value": "abc", "timestamp": "2023-10-15T10:30:00"}  # Invalid reading
+]
+
+processed_sensors = process_sensor_readings(sensor_readings)
+
+print("\nSensor Data Processing:")
+print("=" * 21)
+for reading in processed_sensors:
+    if 'error' in reading:
+        print(f"  {reading['sensor_id']}: {reading['error']} at {reading['timestamp']}")
+    else:
+        print(f"  {reading['sensor_id']}:")
+        print(f"    Value: {reading['processed_value']}")
+        print(f"    Timestamp: {reading['timestamp']}")
+        print(f"    Status: {reading['status']}")
+
+# Inventory management system
+def update_inventory(transactions):
+    """
+    Update inventory quantities based on transaction data
+    """
+    inventory_updates = []
+    
+    for transaction in transactions:
+        item_id = transaction['item_id']
+        quantity_str = transaction['quantity']
+        transaction_type = transaction['type']
+        
+        try:
+            # Convert quantity to integer
+            quantity = convert_to_int(quantity_str)
+            
+            # Process based on transaction type
+            if transaction_type == "ADD":
+                change = quantity
+                action = "Added"
+            elif transaction_type == "REMOVE":
+                change = -quantity
+                action = "Removed"
+            else:
+                change = 0
+                action = "No change"
+            
+            inventory_updates.append({
+                "item_id": item_id,
+                "quantity": quantity,
+                "transaction_type": transaction_type,
+                "change": change,
+                "action": action
+            })
+            
+        except ValueError:
+            inventory_updates.append({
+                "item_id": item_id,
+                "error": f"Invalid quantity: '{quantity_str}'",
+                "transaction_type": transaction_type
+            })
+    
+    return inventory_updates
+
+# Example inventory transactions
+inventory_transactions = [
+    {"item_id": "ITEM_001", "quantity": "25", "type": "ADD"},
+    {"item_id": "ITEM_002", "quantity": "10", "type": "REMOVE"},
+    {"item_id": "ITEM_003", "quantity": "abc", "type": "ADD"},  # Invalid quantity
+    {"item_id": "ITEM_004", "quantity": "5", "type": "ADD"}
+]
+
+inventory_updates = update_inventory(inventory_transactions)
+
+print("\nInventory Management:")
+print("=" * 19)
+for update in inventory_updates:
+    if 'error' in update:
+        print(f"  {update['item_id']}: {update['error']}")
+    else:
+        print(f"  {update['item_id']}: {update['action']} {update['quantity']} units")
+```
+
+These examples demonstrate how string-to-integer conversion is used for user input validation, configuration parsing, sales data processing, sensor readings, and inventory management in real-world applications.

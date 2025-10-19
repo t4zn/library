@@ -33,3 +33,108 @@ Image resizing involves changing the number of pixels in an image through interp
 4. **Quality Considerations**: Repeated resizing operations can degrade image quality, so it's best to resize directly from the original when possible.
 
 Proper image resizing is crucial for computer vision pipelines where models expect specific input dimensions.
+
+## Real-World Example
+
+E-commerce platforms use image resizing to optimize product photos for different devices and page layouts, ensuring fast loading times while maintaining visual quality across all customer touchpoints:
+
+```python
+import taizun as tz
+import os
+
+# Product images uploaded by vendors
+product_images = [
+    "product_001_highres.jpg",
+    "product_002_highres.jpg",
+    "product_003_highres.jpg",
+    "product_004_highres.jpg"
+]
+
+# Different size requirements for various platforms
+size_requirements = {
+    "thumbnail": (150, 150),
+    "catalog": (300, 300),
+    "detail_page": (800, 800),
+    "zoom_view": (1200, 1200)
+}
+
+print("E-commerce Image Optimization Pipeline:")
+print("=" * 40)
+
+# Process each product image for all required sizes
+for image_path in product_images:
+    print(f"Processing: {image_path}")
+    
+    # Create directory for resized images
+    base_name = os.path.splitext(image_path)[0]
+    output_dir = f"optimized_{base_name}"
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Generate all required sizes
+    for size_name, dimensions in size_requirements.items():
+        output_path = f"{output_dir}/{base_name}_{size_name}.jpg"
+        
+        try:
+            # Resize image to required dimensions
+            tz.resize_image(image_path, output_path, size=dimensions)
+            file_size = os.path.getsize(output_path) / 1024  # in KB
+            
+            print(f"  ✓ {size_name.capitalize()} ({dimensions[0]}x{dimensions[1]}): {file_size:.1f}KB")
+            
+        except Exception as e:
+            print(f"  ✗ Error creating {size_name}: {str(e)}")
+    
+    print("-" * 40)
+
+# Batch optimization for inventory update
+def optimize_product_catalog(image_list, requirements):
+    """Optimize entire product catalog with progress tracking"""
+    total_images = len(image_list)
+    processed = 0
+    
+    for image_path in image_list:
+        base_name = os.path.splitext(image_path)[0]
+        output_dir = f"optimized_{base_name}"
+        os.makedirs(output_dir, exist_ok=True)
+        
+        for size_name, dimensions in requirements.items():
+            output_path = f"{output_dir}/{base_name}_{size_name}.jpg"
+            tz.resize_image(image_path, output_path, size=dimensions)
+        
+        processed += 1
+        progress = (processed / total_images) * 100
+        print(f"Progress: {progress:.1f}% ({processed}/{total_images})")
+    
+    return f"Optimized {total_images} products"
+
+# Run batch optimization
+result = optimize_product_catalog(product_images, size_requirements)
+print(f"\n{result}")
+
+# Storage optimization report
+original_sizes = [os.path.getsize(img) / 1024 for img in product_images]  # in KB
+thumbnail_sizes = []
+catalog_sizes = []
+
+for img in product_images:
+    base_name = os.path.splitext(img)[0]
+    thumb_path = f"optimized_{base_name}/{base_name}_thumbnail.jpg"
+    cat_path = f"optimized_{base_name}/{base_name}_catalog.jpg"
+    
+    if os.path.exists(thumb_path):
+        thumbnail_sizes.append(os.path.getsize(thumb_path) / 1024)
+    if os.path.exists(cat_path):
+        catalog_sizes.append(os.path.getsize(cat_path) / 1024)
+
+avg_original = sum(original_sizes) / len(original_sizes) if original_sizes else 0
+avg_thumbnail = sum(thumbnail_sizes) / len(thumbnail_sizes) if thumbnail_sizes else 0
+avg_catalog = sum(catalog_sizes) / len(catalog_sizes) if catalog_sizes else 0
+
+print("\nStorage Optimization Results:")
+print("=" * 30)
+print(f"Average original size: {avg_original:.1f}KB")
+print(f"Average thumbnail size: {avg_thumbnail:.1f}KB ({(1-avg_thumbnail/avg_original)*100:.1f}% reduction)")
+print(f"Average catalog size: {avg_catalog:.1f}KB ({(1-avg_catalog/avg_original)*100:.1f}% reduction)")
+```
+
+This automated image optimization pipeline helps e-commerce platforms deliver optimal user experiences across devices while minimizing bandwidth usage and storage costs.

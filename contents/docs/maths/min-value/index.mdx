@@ -52,3 +52,255 @@ result = min(a, b)
 # or conditional expressions
 result = a if a < b else b
 ```
+
+## Real-World Example
+
+Optimization systems and resource management applications use minimum value calculations to find optimal solutions, enforce constraints, and make efficient allocation decisions in various business and technical contexts:
+
+```python
+from taizun import min_val
+
+# Resource allocation optimization
+def optimize_resource_allocation(projects, available_resources):
+    """
+    Optimize resource allocation by finding minimum requirements
+    """
+    allocation_plan = []
+    total_allocated = 0
+    
+    for project in projects:
+        name = project['name']
+        required = project['required_resources']
+        available = available_resources - total_allocated
+        
+        # Allocate minimum of required and available resources
+        allocated = min_val(required, available)
+        total_allocated += allocated
+        
+        allocation_plan.append({
+            "project": name,
+            "required": required,
+            "allocated": allocated,
+            "satisfaction": "Fully satisfied" if allocated >= required else "Partially satisfied"
+        })
+    
+    return {
+        "allocation_plan": allocation_plan,
+        "total_required": sum(p['required_resources'] for p in projects),
+        "total_allocated": total_allocated,
+        "remaining_resources": available_resources - total_allocated
+    }
+
+# Example resource allocation scenario
+projects = [
+    {"name": "Website Redesign", "required_resources": 50},
+    {"name": "Mobile App Development", "required_resources": 75},
+    {"name": "Database Migration", "required_resources": 40},
+    {"name": "Security Audit", "required_resources": 30}
+]
+
+available_budget = 150  # Available resources
+
+allocation_result = optimize_resource_allocation(projects, available_budget)
+
+print("Resource Allocation Optimization:")
+print("=" * 30)
+print(f"Total Available Resources: {available_budget}")
+print(f"Total Required Resources: {allocation_result['total_required']}")
+print(f"Total Allocated Resources: {allocation_result['total_allocated']}")
+print(f"Remaining Resources: {allocation_result['remaining_resources']}")
+print("\nProject Allocations:")
+for project in allocation_result['allocation_plan']:
+    print(f"  {project['project']}:")
+    print(f"    Required: {project['required']}")
+    print(f"    Allocated: {project['allocated']}")
+    print(f"    Status: {project['satisfaction']}")
+
+# Price comparison for e-commerce
+def compare_product_prices(products):
+    """
+    Compare prices across different retailers to find minimum prices
+    """
+    comparison_results = []
+    
+    for product in products:
+        name = product['name']
+        prices = product['prices']  # Prices from different retailers
+        
+        if not prices:
+            continue
+            
+        # Find minimum price among retailers
+        min_price = prices[0]
+        for price in prices[1:]:
+            min_price = min_val(min_price, price)
+        
+        # Find which retailer offers the minimum price
+        best_retailer = None
+        for retailer, price in product['retailers'].items():
+            if price == min_price:
+                best_retailer = retailer
+                break
+        
+        comparison_results.append({
+            "product": name,
+            "prices": prices,
+            "min_price": min_price,
+            "best_retailer": best_retailer,
+            "savings": max(prices) - min_price if prices else 0
+        })
+    
+    return comparison_results
+
+# Example product price comparison
+products = [
+    {
+        "name": "Wireless Headphones",
+        "prices": [199.99, 179.99, 189.99, 169.99],
+        "retailers": {
+            "TechStore": 199.99,
+            "ElectroMall": 179.99,
+            "GadgetShop": 189.99,
+            "BestDeals": 169.99
+        }
+    },
+    {
+        "name": "Smartphone",
+        "prices": [899.99, 849.99, 879.99, 829.99],
+        "retailers": {
+            "TechStore": 899.99,
+            "ElectroMall": 849.99,
+            "GadgetShop": 879.99,
+            "BestDeals": 829.99
+        }
+    }
+]
+
+price_comparisons = compare_product_prices(products)
+
+print("\nPrice Comparison Analysis:")
+print("=" * 23)
+for product in price_comparisons:
+    print(f"Product: {product['product']}")
+    print(f"  Minimum Price: ${product['min_price']}")
+    print(f"  Best Retailer: {product['best_retailer']}")
+    print(f"  Maximum Savings: ${product['savings']:.2f}")
+    print()
+
+# Performance threshold monitoring
+def monitor_performance_thresholds(metrics, thresholds):
+    """
+    Monitor system performance metrics against minimum thresholds
+    """
+    results = []
+    
+    for metric_name, current_value in metrics.items():
+        threshold = thresholds.get(metric_name, 0)
+        
+        # Check if current value meets minimum threshold
+        meets_threshold = current_value >= threshold
+        min_acceptable = min_val(current_value, threshold)
+        
+        results.append({
+            "metric": metric_name,
+            "current_value": current_value,
+            "threshold": threshold,
+            "meets_threshold": meets_threshold,
+            "min_acceptable": min_acceptable,
+            "status": "OK" if meets_threshold else "WARNING"
+        })
+    
+    return results
+
+# Example system performance metrics
+performance_metrics = {
+    "response_time": 150,      # ms
+    "throughput": 1200,        # requests/second
+    "availability": 99.5,      # percentage
+    "error_rate": 0.5          # percentage
+}
+
+performance_thresholds = {
+    "response_time": 200,      # should be <= 200ms
+    "throughput": 1000,        # should be >= 1000 req/s
+    "availability": 99.0,      # should be >= 99%
+    "error_rate": 1.0          # should be <= 1%
+}
+
+performance_results = monitor_performance_thresholds(performance_metrics, performance_thresholds)
+
+print("Performance Threshold Monitoring:")
+print("=" * 30)
+for result in performance_results:
+    print(f"Metric: {result['metric']}")
+    print(f"  Current Value: {result['current_value']}")
+    print(f"  Threshold: {result['threshold']}")
+    print(f"  Status: {result['status']}")
+    print(f"  Meets Threshold: {result['meets_threshold']}")
+    print()
+
+# Risk assessment in financial portfolios
+def assess_portfolio_risk(assets):
+    """
+    Assess portfolio risk by finding minimum risk assets
+    """
+    risk_assessments = []
+    
+    for asset in assets:
+        name = asset['name']
+        risk_scores = asset['risk_scores']  # Risk scores under different scenarios
+        
+        if not risk_scores:
+            continue
+            
+        # Find minimum risk score (best case scenario)
+        min_risk = risk_scores[0]
+        for score in risk_scores[1:]:
+            min_risk = min_val(min_risk, score)
+        
+        # Calculate risk profile
+        avg_risk = sum(risk_scores) / len(risk_scores)
+        risk_volatility = max(risk_scores) - min_risk
+        
+        risk_assessments.append({
+            "asset": name,
+            "risk_scores": risk_scores,
+            "min_risk": min_risk,
+            "avg_risk": round(avg_risk, 2),
+            "risk_volatility": round(risk_volatility, 2),
+            "risk_profile": "Low" if min_risk < 3 else "Medium" if min_risk < 7 else "High"
+        })
+    
+    return risk_assessments
+
+# Example portfolio assets with risk scores (1-10 scale)
+portfolio_assets = [
+    {
+        "name": "Government Bonds",
+        "risk_scores": [1, 1, 2, 1, 2]  # Very stable
+    },
+    {
+        "name": "Blue Chip Stocks",
+        "risk_scores": [3, 4, 5, 3, 4]  # Moderately stable
+    },
+    {
+        "name": "Startup Investments",
+        "risk_scores": [8, 9, 10, 7, 9]  # Highly volatile
+    }
+]
+
+risk_assessments = assess_portfolio_risk(portfolio_assets)
+
+print("Portfolio Risk Assessment:")
+print("=" * 24)
+for assessment in risk_assessments:
+    print(f"Asset: {assessment['asset']}")
+    print(f"  Risk Scores: {assessment['risk_scores']}")
+    print(f"  Minimum Risk: {assessment['min_risk']}")
+    print(f"  Average Risk: {assessment['avg_risk']}")
+    print(f"  Risk Volatility: {assessment['risk_volatility']}")
+    print(f"  Risk Profile: {assessment['risk_profile']}")
+    print()
+```
+
+These examples demonstrate how minimum value calculations are used for resource optimization, price comparison, performance monitoring, and financial risk assessment in real-world applications.

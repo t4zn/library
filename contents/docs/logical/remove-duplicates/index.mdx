@@ -59,3 +59,198 @@ unique = list(set(original_list))
 # Preserving order with dict (Python 3.7+)
 unique = list(dict.fromkeys(original_list))
 ```
+
+## Real-World Example
+
+Data processing systems and user interface applications use duplicate removal to clean datasets, optimize performance, and present unique information in various business and technical contexts:
+
+```python
+from taizun import remove_duplicates
+
+# Data cleaning for customer databases
+def clean_customer_data(customer_records):
+    """
+    Remove duplicate customer records based on email addresses
+    """
+    unique_customers = []
+    seen_emails = set()
+    
+    for customer in customer_records:
+        email = customer.get('email', '').lower()
+        if email not in seen_emails:
+            seen_emails.add(email)
+            unique_customers.append(customer)
+    
+    return unique_customers
+
+# Example customer data with duplicates
+customer_data = [
+    {"id": 1, "name": "John Smith", "email": "john@example.com"},
+    {"id": 2, "name": "Jane Doe", "email": "jane@example.com"},
+    {"id": 3, "name": "John Smith", "email": "john@example.com"},  # Duplicate
+    {"id": 4, "name": "Bob Johnson", "email": "bob@example.com"},
+    {"id": 5, "name": "Alice Brown", "email": "alice@example.com"},
+    {"id": 6, "name": "Jane Doe", "email": "jane@example.com"}     # Duplicate
+]
+
+cleaned_customers = clean_customer_data(customer_data)
+
+print("Customer Database Cleaning:")
+print("=" * 25)
+print(f"Original records: {len(customer_data)}")
+print(f"Unique records: {len(cleaned_customers)}")
+print("Cleaned customer data:")
+for customer in cleaned_customers:
+    print(f"  {customer}")
+
+# Search result deduplication
+def deduplicate_search_results(search_results):
+    """
+    Remove duplicate search results while preserving relevance order
+    """
+    # Extract unique URLs while preserving order
+    unique_urls = remove_duplicates([result['url'] for result in search_results])
+    
+    # Rebuild results with unique URLs
+    deduplicated = []
+    used_urls = set()
+    
+    for result in search_results:
+        if result['url'] not in used_urls:
+            used_urls.add(result['url'])
+            deduplicated.append(result)
+    
+    return deduplicated
+
+# Example search results with duplicates
+search_results = [
+    {"title": "Python Tutorial", "url": "https://example.com/python", "score": 95},
+    {"title": "Python Guide", "url": "https://example.com/python", "score": 92},  # Duplicate URL
+    {"title": "JavaScript Basics", "url": "https://example.com/js", "score": 88},
+    {"title": "Python Advanced", "url": "https://example.com/python-advanced", "score": 90},
+    {"title": "JS Frameworks", "url": "https://example.com/js", "score": 85},     # Duplicate URL
+    {"title": "CSS Tips", "url": "https://example.com/css", "score": 82}
+]
+
+deduplicated_results = deduplicate_search_results(search_results)
+
+print("\nSearch Result Deduplication:")
+print("=" * 27)
+print(f"Original results: {len(search_results)}")
+print(f"Deduplicated results: {len(deduplicated_results)}")
+print("Deduplicated search results:")
+for result in deduplicated_results:
+    print(f"  {result['title']} - {result['url']} (Score: {result['score']})")
+
+# Product recommendation deduplication
+def deduplicate_recommendations(user_recommendations):
+    """
+    Remove duplicate product recommendations for a user
+    """
+    # Flatten all recommendations
+    all_products = []
+    for category, products in user_recommendations.items():
+        all_products.extend(products)
+    
+    # Remove duplicates while preserving order
+    unique_products = remove_duplicates(all_products)
+    
+    return unique_products
+
+# Example user recommendations with duplicates
+user_recs = {
+    "electronics": ["iPhone 15", "Samsung TV", "MacBook Pro", "iPhone 15"],  # Duplicate
+    "books": ["Python Guide", "AI Handbook", "Python Guide"],                # Duplicate
+    "clothing": ["Nike Shoes", "Adidas Jacket", "Nike Shoes"]                # Duplicate
+}
+
+unique_recommendations = deduplicate_recommendations(user_recs)
+
+print("\nProduct Recommendation Deduplication:")
+print("=" * 34)
+print("Original recommendations:")
+for category, products in user_recs.items():
+    print(f"  {category}: {products}")
+
+print(f"Unique recommendations: {unique_recommendations}")
+
+# Log entry filtering
+def filter_unique_log_entries(log_entries):
+    """
+    Filter log entries to show unique error messages
+    """
+    # Extract unique messages while preserving order
+    unique_messages = remove_duplicates([entry['message'] for entry in log_entries])
+    
+    # Create filtered log with first occurrence of each unique message
+    filtered_logs = []
+    seen_messages = set()
+    
+    for entry in log_entries:
+        if entry['message'] not in seen_messages:
+            seen_messages.add(entry['message'])
+            filtered_logs.append(entry)
+    
+    return filtered_logs
+
+# Example log entries with duplicate messages
+log_entries = [
+    {"timestamp": "2023-10-15 10:30:15", "level": "ERROR", "message": "Database connection failed"},
+    {"timestamp": "2023-10-15 10:30:16", "level": "WARN", "message": "Low memory warning"},
+    {"timestamp": "2023-10-15 10:30:17", "level": "ERROR", "message": "Database connection failed"},  # Duplicate
+    {"timestamp": "2023-10-15 10:30:18", "level": "INFO", "message": "User login successful"},
+    {"timestamp": "2023-10-15 10:30:19", "level": "WARN", "message": "Low memory warning"},          # Duplicate
+    {"timestamp": "2023-10-15 10:30:20", "level": "ERROR", "message": "File not found"}
+]
+
+filtered_logs = filter_unique_log_entries(log_entries)
+
+print("\nLog Entry Filtering:")
+print("=" * 19)
+print(f"Original log entries: {len(log_entries)}")
+print(f"Unique log entries: {len(filtered_logs)}")
+print("Filtered log entries:")
+for entry in filtered_logs:
+    print(f"  [{entry['timestamp']}] {entry['level']}: {entry['message']}")
+
+# User selection deduplication
+def process_user_selections(user_selections):
+    """
+    Process user selections to remove duplicates while tracking frequency
+    """
+    # Count occurrences of each selection
+    selection_count = {}
+    for selection in user_selections:
+        selection_count[selection] = selection_count.get(selection, 0) + 1
+    
+    # Get unique selections
+    unique_selections = remove_duplicates(user_selections)
+    
+    # Create result with frequency information
+    result = []
+    for selection in unique_selections:
+        result.append({
+            "item": selection,
+            "count": selection_count[selection],
+            "popularity": "High" if selection_count[selection] > 2 else "Medium" if selection_count[selection] > 1 else "Low"
+        })
+    
+    return result
+
+# Example user selections
+user_selections = [
+    "Python", "JavaScript", "Python", "Java", "Python",  # Python selected 3 times
+    "React", "Vue", "React",                             # React selected 2 times
+    "Node.js", "Django", "Flask"
+]
+
+processed_selections = process_user_selections(user_selections)
+
+print("\nUser Selection Processing:")
+print("=" * 24)
+print("Processed user selections:")
+for selection in processed_selections:
+    print(f"  {selection['item']}: {selection['count']} selections ({selection['popularity']} popularity)")
+```
+
+These examples demonstrate how duplicate removal is used for database cleaning, search result optimization, product recommendations, log filtering, and user selection processing in real-world applications.

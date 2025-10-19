@@ -53,3 +53,195 @@ In programming:
 def average(numbers):
     return sum(numbers) / len(numbers) if numbers else 0
 ```
+
+## Real-World Example
+
+Financial analysis and performance monitoring systems use average calculations to track stock prices, evaluate investment returns, and measure system performance in various business and technical contexts:
+
+```python
+from taizun import avg
+
+# Stock price analysis for investment decisions
+def analyze_stock_performance(stock_prices, stock_symbol):
+    """
+    Analyze stock performance by calculating various averages
+    """
+    if not stock_prices:
+        return {"error": "No price data available"}
+    
+    # Calculate overall average price
+    average_price = avg(stock_prices)
+    
+    # Calculate moving averages for trend analysis
+    if len(stock_prices) >= 5:
+        recent_5_day_avg = avg(stock_prices[-5:])  # 5-day moving average
+    else:
+        recent_5_day_avg = average_price
+    
+    if len(stock_prices) >= 20:
+        recent_20_day_avg = avg(stock_prices[-20:])  # 20-day moving average
+    else:
+        recent_20_day_avg = average_price
+    
+    # Calculate volatility (average deviation from mean)
+    deviations = [abs(price - average_price) for price in stock_prices]
+    average_deviation = avg(deviations)
+    
+    # Trend analysis
+    trend = "Bullish" if recent_5_day_avg > recent_20_day_avg else "Bearish" if recent_5_day_avg < recent_20_day_avg else "Neutral"
+    
+    return {
+        "stock_symbol": stock_symbol,
+        "current_price": stock_prices[-1],
+        "average_price": round(average_price, 2),
+        "recent_5_day_avg": round(recent_5_day_avg, 2),
+        "recent_20_day_avg": round(recent_20_day_avg, 2),
+        "volatility": round(average_deviation, 2),
+        "trend": trend,
+        "data_points": len(stock_prices)
+    }
+
+# Example stock price data (closing prices over 30 days)
+tech_stock_prices = [150.25, 152.30, 149.80, 155.40, 157.20, 156.80, 158.90, 160.15, 159.75, 162.30,
+                     161.80, 163.45, 165.20, 164.75, 166.90, 168.30, 167.85, 169.40, 171.25, 170.80,
+                     172.50, 174.30, 173.85, 175.60, 177.25, 176.90, 178.45, 180.10, 179.75, 181.30]
+
+stock_analysis = analyze_stock_performance(tech_stock_prices, "TECH")
+
+print("Stock Performance Analysis:")
+print("=" * 25)
+print(f"Stock Symbol: {stock_analysis['stock_symbol']}")
+print(f"Current Price: ${stock_analysis['current_price']}")
+print(f"30-Day Average Price: ${stock_analysis['average_price']}")
+print(f"5-Day Moving Average: ${stock_analysis['recent_5_day_avg']}")
+print(f"20-Day Moving Average: ${stock_analysis['recent_20_day_avg']}")
+print(f"Average Volatility: ${stock_analysis['volatility']}")
+print(f"Market Trend: {stock_analysis['trend']}")
+print(f"Data Points: {stock_analysis['data_points']}")
+
+# Student grade analysis for educational institutions
+def analyze_class_performance(student_grades, subject):
+    """
+    Analyze class performance using averages and statistical measures
+    """
+    if not student_grades:
+        return {"error": "No grade data available"}
+    
+    # Calculate class average
+    class_average = avg(student_grades)
+    
+    # Calculate grade distribution
+    a_grades = [g for g in student_grades if g >= 90]
+    b_grades = [g for g in student_grades if 80 <= g < 90]
+    c_grades = [g for g in student_grades if 70 <= g < 80]
+    d_grades = [g for g in student_grades if 60 <= g < 70]
+    f_grades = [g for g in student_grades if g < 60]
+    
+    # Performance metrics
+    passing_rate = len([g for g in student_grades if g >= 60]) / len(student_grades) * 100
+    
+    # Identify outliers (grades significantly above or below average)
+    std_dev = avg([abs(grade - class_average) for grade in student_grades])
+    high_performers = [g for g in student_grades if g > class_average + std_dev]
+    low_performers = [g for g in student_grades if g < class_average - std_dev]
+    
+    return {
+        "subject": subject,
+        "class_average": round(class_average, 2),
+        "total_students": len(student_grades),
+        "grade_distribution": {
+            "A (90-100)": len(a_grades),
+            "B (80-89)": len(b_grades),
+            "C (70-79)": len(c_grades),
+            "D (60-69)": len(d_grades),
+            "F (0-59)": len(f_grades)
+        },
+        "passing_rate": round(passing_rate, 2),
+        "high_performers": len(high_performers),
+        "low_performers": len(low_performers)
+    }
+
+# Example student grades for a mathematics class
+math_grades = [95, 87, 92, 78, 88, 91, 85, 96, 89, 84, 93, 86, 90, 82, 94, 88, 97, 83, 91, 89,
+               85, 92, 87, 90, 86, 94, 88, 93, 85, 91]
+
+class_analysis = analyze_class_performance(math_grades, "Mathematics")
+
+print("\nClass Performance Analysis:")
+print("=" * 24)
+print(f"Subject: {class_analysis['subject']}")
+print(f"Class Average: {class_analysis['class_average']}")
+print(f"Total Students: {class_analysis['total_students']}")
+print(f"Passing Rate: {class_analysis['passing_rate']}%")
+print(f"High Performers: {class_analysis['high_performers']} students")
+print(f"Low Performers: {class_analysis['low_performers']} students")
+print("\nGrade Distribution:")
+for grade_range, count in class_analysis['grade_distribution'].items():
+    print(f"  {grade_range}: {count} students")
+
+# Server performance monitoring
+def monitor_server_performance(response_times, server_name):
+    """
+    Monitor server performance using average response times
+    """
+    if not response_times:
+        return {"error": "No response time data available"}
+    
+    # Calculate average response time
+    avg_response_time = avg(response_times)
+    
+    # Calculate performance percentiles
+    sorted_times = sorted(response_times)
+    n = len(sorted_times)
+    
+    # 95th percentile (95% of requests are faster than this)
+    p95_index = int(0.95 * n) - 1 if int(0.95 * n) > 0 else 0
+    p95_time = sorted_times[p95_index] if p95_index < n else sorted_times[-1]
+    
+    # 99th percentile (99% of requests are faster than this)
+    p99_index = int(0.99 * n) - 1 if int(0.99 * n) > 0 else 0
+    p99_time = sorted_times[p99_index] if p99_index < n else sorted_times[-1]
+    
+    # Performance classification
+    if avg_response_time < 100:
+        performance = "Excellent"
+    elif avg_response_time < 300:
+        performance = "Good"
+    elif avg_response_time < 500:
+        performance = "Acceptable"
+    else:
+        performance = "Poor"
+    
+    # Identify slow requests (outliers)
+    slow_requests = [t for t in response_times if t > avg_response_time * 2]
+    
+    return {
+        "server_name": server_name,
+        "average_response_time": round(avg_response_time, 2),
+        "p95_response_time": round(p95_time, 2),
+        "p99_response_time": round(p99_time, 2),
+        "performance": performance,
+        "total_requests": len(response_times),
+        "slow_requests": len(slow_requests),
+        "slow_request_threshold": round(avg_response_time * 2, 2)
+    }
+
+# Example server response times (in milliseconds)
+server_response_times = [45, 52, 48, 65, 58, 51, 49, 72, 55, 47, 53, 68, 59, 50, 56, 63, 54, 46,
+                         61, 57, 49, 75, 58, 52, 50, 66, 59, 53, 55, 62, 57, 48, 64, 56, 51, 69,
+                         60, 54, 52, 67, 58, 50, 55, 63, 59, 51, 65, 57, 53, 61]
+
+server_analysis = monitor_server_performance(server_response_times, "WebServer-01")
+
+print("\nServer Performance Monitoring:")
+print("=" * 29)
+print(f"Server: {server_analysis['server_name']}")
+print(f"Average Response Time: {server_analysis['average_response_time']}ms")
+print(f"95th Percentile: {server_analysis['p95_response_time']}ms")
+print(f"99th Percentile: {server_analysis['p99_response_time']}ms")
+print(f"Performance Rating: {server_analysis['performance']}")
+print(f"Total Requests: {server_analysis['total_requests']}")
+print(f"Slow Requests: {server_analysis['slow_requests']} (>{server_analysis['slow_request_threshold']}ms)")
+```
+
+These examples demonstrate how average calculations are used for stock market analysis, educational assessment, and server performance monitoring in real-world applications.

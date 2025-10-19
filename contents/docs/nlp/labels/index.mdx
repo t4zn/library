@@ -26,3 +26,59 @@ NER is typically modeled as a sequence labeling task where each token (word) in 
 3. **Deep learning models**: Neural architectures like BiLSTM-CRF or transformer-based models (BERT, RoBERTa) that can capture complex linguistic patterns.
 
 Modern NER systems achieve high accuracy by combining multiple approaches and leveraging large annotated datasets. The performance often depends on the domain and language of the text being processed.
+
+## Real-World Example
+
+News organizations and intelligence agencies use NER to automatically extract key information from large volumes of text documents. This helps in organizing information and identifying important entities:
+
+```python
+import taizun as tz
+
+# News article about international business deal
+news_text = """
+Apple Inc. announced yesterday that CEO Tim Cook will visit Tokyo next month 
+to discuss a potential partnership with Sony Corporation. The meeting is scheduled 
+for March 15, 2024, at Sony's headquarters in Minato, Tokyo. Apple plans to invest 
+$2.5 billion in the joint venture, which will focus on developing augmented reality 
+technology for the Asian market. Japanese Prime Minister Fumio Kishida welcomed 
+the investment, stating it would create approximately 3,000 jobs in the region.
+"""
+
+# Extract named entities
+entities = tz.labels(news_text)
+
+print("Named Entities Identified:")
+print("=" * 30)
+for entity in entities:
+    print(f"Entity: {entity}")
+
+# Typical output might include:
+# Organization: Apple Inc.
+# Person: Tim Cook
+# Location: Tokyo
+# Date: March 15, 2024
+# Organization: Sony Corporation
+# Location: Minato
+# Location: Tokyo
+# Monetary Value: $2.5 billion
+# Person: Fumio Kishida
+# Location: Asian market
+# Quantity: 3,000 jobs
+
+# Process entities by category
+organizations = [e for e in entities if "Inc." in e or "Corporation" in e]
+people = [e for e in entities if any(name in e for name in ["Tim Cook", "Fumio Kishida"])]
+locations = [e for e in entities if e in ["Tokyo", "Minato", "Asian market"]]
+dates = [e for e in entities if "2024" in e]
+monetary_values = [e for e in entities if "$" in e or "billion" in e]
+
+print("\nCategorized Entities:")
+print("=" * 20)
+print(f"Organizations: {organizations}")
+print(f"People: {people}")
+print(f"Locations: {locations}")
+print(f"Dates: {dates}")
+print(f"Monetary Values: {monetary_values}")
+```
+
+This automated entity extraction enables newsrooms to quickly index articles, create knowledge graphs, and facilitate advanced search capabilities across their content repositories.

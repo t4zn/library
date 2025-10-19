@@ -56,3 +56,193 @@ trailing = text.rstrip()     # Remove from right only
 # Custom characters
 stripped = text.strip(" \t\n")  # Specify characters to remove
 ```
+
+## Real-World Example
+
+Data validation systems and text processing applications use whitespace stripping to clean user input, parse configuration files, and standardize data formats in various business and technical contexts:
+
+```python
+from taizun import strip_spaces
+
+# User input validation for web forms
+def validate_and_clean_form_data(form_data):
+    """
+    Clean and validate user form data by stripping whitespace
+    """
+    cleaned_data = {}
+    errors = []
+    
+    for field, value in form_data.items():
+        if isinstance(value, str):
+            # Strip whitespace from string values
+            stripped_value = strip_spaces(value)
+            
+            # Check for empty values after stripping
+            if not stripped_value and field in ["username", "email", "name"]:
+                errors.append(f"{field} cannot be empty")
+            
+            cleaned_data[field] = stripped_value
+        else:
+            cleaned_data[field] = value
+    
+    return {
+        "cleaned_data": cleaned_data,
+        "errors": errors,
+        "is_valid": len(errors) == 0
+    }
+
+# Example form data with extraneous whitespace
+form_data = {
+    "username": "  john_doe  ",
+    "email": "  john@example.com  ",
+    "name": "  John Doe  ",
+    "phone": "  +1-555-123-4567  ",
+    "address": "  123 Main St, Apt 4B  "
+}
+
+validation_result = validate_and_clean_form_data(form_data)
+
+print("Form Data Validation:")
+print("=" * 20)
+print("Original data:")
+for field, value in form_data.items():
+    print(f"  {field}: '{value}'")
+
+print("\nCleaned data:")
+for field, value in validation_result["cleaned_data"].items():
+    print(f"  {field}: '{value}'")
+
+print(f"\nValidation result: {'Valid' if validation_result['is_valid'] else 'Invalid'}")
+if validation_result["errors"]:
+    print("Errors:", validation_result["errors"])
+
+# Configuration file parser
+def parse_config_file(config_lines):
+    """
+    Parse configuration file lines by stripping whitespace and separating key-value pairs
+    """
+    config = {}
+    
+    for line in config_lines:
+        # Strip whitespace from the entire line
+        clean_line = strip_spaces(line)
+        
+        # Skip empty lines and comments
+        if not clean_line or clean_line.startswith("#"):
+            continue
+        
+        # Split on '=' and strip whitespace from key and value
+        if "=" in clean_line:
+            key, value = clean_line.split("=", 1)
+            config[strip_spaces(key)] = strip_spaces(value)
+    
+    return config
+
+# Example configuration file content
+config_lines = [
+    "  # Database configuration  ",
+    "  host = localhost  ",
+    "port=5432",
+    "  username = admin  ",
+    "  password = secret123  ",
+    "  ",
+    "# Cache settings",
+    "  cache_enabled = true  ",
+    "cache_timeout=300"
+]
+
+parsed_config = parse_config_file(config_lines)
+
+print("\nConfiguration File Parsing:")
+print("=" * 26)
+print("Parsed configuration:")
+for key, value in parsed_config.items():
+    print(f"  {key}: {value}")
+
+# CSV data processing
+def process_csv_row(csv_row, delimiter=","):
+    """
+    Process a CSV row by splitting and stripping whitespace from each field
+    """
+    # Split the row by delimiter
+    fields = csv_row.split(delimiter)
+    
+    # Strip whitespace from each field
+    cleaned_fields = [strip_spaces(field) for field in fields]
+    
+    return cleaned_fields
+
+# Example CSV data with inconsistent spacing
+csv_data = [
+    "  John Doe  ,  john@example.com  ,  Engineer  ",
+    "  Jane Smith,  jane@example.com,Manager",
+    "Bob Johnson,  bob@example.com  ,Designer"
+]
+
+print("\nCSV Data Processing:")
+print("=" * 19)
+print("Processed CSV rows:")
+for i, row in enumerate(csv_data):
+    processed_row = process_csv_row(row)
+    print(f"  Row {i+1}: {processed_row}")
+
+# Log entry parsing
+def parse_log_entry(log_entry):
+    """
+    Parse a log entry by splitting components and stripping whitespace
+    """
+    # Split log entry into components
+    components = log_entry.split(" - ")
+    
+    # Strip whitespace from each component
+    cleaned_components = [strip_spaces(comp) for comp in components]
+    
+    # Create structured log entry
+    if len(cleaned_components) >= 3:
+        return {
+            "timestamp": cleaned_components[0],
+            "level": cleaned_components[1],
+            "message": cleaned_components[2]
+        }
+    else:
+        return {"raw": strip_spaces(log_entry)}
+
+# Example log entries with inconsistent spacing
+log_entries = [
+    "  2023-10-15 10:30:15  -  ERROR  -  Database connection failed  ",
+    "2023-10-15 10:30:16 - warn - Low memory warning",
+    "  2023-10-15 10:30:17  -  INFO  -  User login successful"
+]
+
+print("\nLog Entry Parsing:")
+print("=" * 18)
+print("Parsed log entries:")
+for entry in log_entries:
+    parsed = parse_log_entry(entry)
+    print(f"  {parsed}")
+
+# Command-line argument processing
+def process_cli_arguments(args):
+    """
+    Process command-line arguments by stripping whitespace and filtering empty values
+    """
+    # Strip whitespace from all arguments
+    stripped_args = [strip_spaces(arg) for arg in args]
+    
+    # Filter out empty arguments
+    valid_args = [arg for arg in stripped_args if arg]
+    
+    return valid_args
+
+# Example command-line arguments with whitespace
+cli_args = ["  start  ", "  ", "--verbose", "  config.json  ", "  ", "  --port=8080  "]
+
+processed_args = process_cli_arguments(cli_args)
+
+print("\nCLI Argument Processing:")
+print("=" * 23)
+print("Original arguments:", cli_args)
+print("Processed arguments:", processed_args)
+```
+
+These examples demonstrate how whitespace stripping is used for form validation, configuration parsing, CSV processing, log analysis, and command-line argument handling in real-world applications.

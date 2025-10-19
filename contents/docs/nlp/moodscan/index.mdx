@@ -28,3 +28,49 @@ The main approaches include:
 3. **Deep learning methods**: Employ neural networks like RNNs or transformer models (BERT) that can capture contextual information and complex linguistic patterns.
 
 The choice of approach depends on the application requirements, available training data, and desired accuracy. Deep learning methods generally provide the best performance but require more computational resources.
+
+## Real-World Example
+
+E-commerce companies extensively use sentiment analysis to monitor customer reviews and feedback about their products. This helps them understand customer satisfaction levels and identify areas for improvement:
+
+```python
+import taizun as tz
+
+# Customer reviews for a smartphone
+reviews = [
+    "The battery life is amazing and the camera quality is outstanding! Highly recommend.",
+    "Terrible experience. Phone keeps freezing and the screen cracked within a week.",
+    "Average phone. Good features but nothing exceptional. Decent price though.",
+    "Best purchase I've made this year! Fast processor and beautiful display.",
+    "Not worth the money. Overpriced and underperforming compared to competitors."
+]
+
+# Analyze sentiment of each review
+print("Customer Review Sentiment Analysis:")
+print("=" * 40)
+
+for i, review in enumerate(reviews, 1):
+    sentiment = tz.moodscan(review)
+    print(f"Review {i}: {sentiment}")
+    print(f"Text: {review[:50]}{'...' if len(review) > 50 else ''}")
+    print("-" * 30)
+
+# Output might be:
+# Review 1: Positive
+# Review 2: Negative
+# Review 3: Neutral
+# Review 4: Positive
+# Review 5: Negative
+
+# Calculate overall sentiment score
+positive_reviews = sum(1 for review in reviews if tz.moodscan(review) == "Positive")
+negative_reviews = sum(1 for review in reviews if tz.moodscan(review) == "Negative")
+neutral_reviews = sum(1 for review in reviews if tz.moodscan(review) == "Neutral")
+
+print(f"\nOverall Sentiment Summary:")
+print(f"Positive: {positive_reviews}/{len(reviews)} ({positive_reviews/len(reviews)*100:.1f}%)")
+print(f"Negative: {negative_reviews}/{len(reviews)} ({negative_reviews/len(reviews)*100:.1f}%)")
+print(f"Neutral: {neutral_reviews}/{len(reviews)} ({neutral_reviews/len(reviews)*100:.1f}%)")
+```
+
+This kind of analysis enables businesses to make data-driven decisions about product improvements, marketing strategies, and customer service enhancements.

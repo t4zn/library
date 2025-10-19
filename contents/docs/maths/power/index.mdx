@@ -56,3 +56,133 @@ result = base ** exponent
 # or
 result = pow(base, exponent)
 ```
+
+## Real-World Example
+
+Financial modeling and scientific applications use power functions to calculate compound growth, decay processes, and complex mathematical relationships:
+
+```python
+from taizun import power
+
+# Compound interest calculator for investment growth
+def compound_interest_calculator(principal, annual_rate, years, compounds_per_year=1):
+    """
+    Calculate compound interest using the formula: A = P(1 + r/n)^(nt)
+    Where:
+    - A = final amount
+    - P = principal amount
+    - r = annual interest rate (as decimal)
+    - n = number of times interest is compounded per year
+    - t = number of years
+    """
+    rate_decimal = annual_rate / 100
+    base = 1 + (rate_decimal / compounds_per_year)
+    exponent = compounds_per_year * years
+    
+    # Calculate (1 + r/n)^(nt)
+    compound_factor = power(base, exponent)
+    
+    # Final amount = P * compound_factor
+    final_amount = power(principal, 1) * compound_factor  # Using power for consistency
+    
+    return {
+        "final_amount": round(final_amount, 2),
+        "total_interest": round(final_amount - principal, 2),
+        "roi_percentage": round(((final_amount - principal) / principal) * 100, 2)
+    }
+
+# Example: $10,000 investment at 6% annual interest compounded monthly for 10 years
+investment = compound_interest_calculator(10000, 6, 10, 12)
+
+print("Investment Growth Analysis:")
+print("=" * 28)
+print(f"Initial Investment: $10,000")
+print(f"Annual Interest Rate: 6%")
+print(f"Compounding: Monthly (12 times/year)")
+print(f"Investment Period: 10 years")
+print(f"Final Amount: ${investment['final_amount']:,}")
+print(f"Total Interest Earned: ${investment['total_interest']:,}")
+print(f"Return on Investment: {investment['roi_percentage']}%")
+
+# Population growth modeling
+def population_growth_model(initial_population, growth_rate, years):
+    """
+    Model population growth using exponential function: P(t) = P₀ × e^(rt)
+    For simplicity, we'll use (1 + r)^t approximation for small growth rates
+    """
+    growth_factor = power(1 + growth_rate/100, years)
+    final_population = initial_population * growth_factor
+    
+    return {
+        "final_population": int(final_population),
+        "population_increase": int(final_population - initial_population),
+        "growth_multiple": round(growth_factor, 2)
+    }
+
+# Example: City with 500,000 people growing at 2.5% annually for 20 years
+city_growth = population_growth_model(500000, 2.5, 20)
+
+print("\nPopulation Growth Model:")
+print("=" * 23)
+print(f"Initial Population: 500,000")
+print(f"Annual Growth Rate: 2.5%")
+print(f"Projection Period: 20 years")
+print(f"Final Population: {city_growth['final_population']:,}")
+print(f"Population Increase: {city_growth['population_increase']:,}")
+print(f"Growth Multiple: {city_growth['growth_multiple']}x")
+
+# Physics: Inverse square law for light intensity
+def light_intensity_calculator(initial_intensity, distance_factor):
+    """
+    Calculate light intensity using inverse square law: I = I₀ / d²
+    Where d is the distance factor (multiple of original distance)
+    """
+    distance_squared = power(distance_factor, 2)
+    final_intensity = initial_intensity / distance_squared
+    
+    return {
+        "final_intensity": round(final_intensity, 2),
+        "intensity_ratio": round(1 / distance_squared, 4),
+        "percentage_remaining": round((1 / distance_squared) * 100, 2)
+    }
+
+# Example: Light intensity at 3 times the original distance
+light_result = light_intensity_calculator(100, 3)  # 100 units at original distance
+
+print("\nLight Intensity Calculation:")
+print("=" * 27)
+print(f"Initial Intensity: 100 units")
+print(f"Distance Factor: 3x original")
+print(f"Final Intensity: {light_result['final_intensity']} units")
+print(f"Intensity Ratio: {light_result['intensity_ratio']}")
+print(f"Percentage Remaining: {light_result['percentage_remaining']}%")
+
+# Technology: Moore's Law processor performance
+def moore_law_calculator(initial_transistors, years):
+    """
+    Model processor performance based on Moore's Law (transistors double every ~2 years)
+    Formula: Final = Initial × 2^(years/2)
+    """
+    doubling_periods = years / 2
+    growth_factor = power(2, doubling_periods)
+    final_transistors = initial_transistors * growth_factor
+    
+    return {
+        "final_transistors": int(final_transistors),
+        "performance_increase": int(final_transistors - initial_transistors),
+        "doubling_periods": doubling_periods
+    }
+
+# Example: Processor with 1 billion transistors in 2020, project to 2030
+processor_growth = moore_law_calculator(1000000000, 10)
+
+print("\nProcessor Performance Projection:")
+print("=" * 32)
+print(f"Initial Transistors (2020): 1,000,000,000")
+print(f"Projection Period: 10 years (2020-2030)")
+print(f"Doubling Periods: {processor_growth['doubling_periods']}")
+print(f"Projected Transistors (2030): {processor_growth['final_transistors']:,}")
+print(f"Performance Increase: {processor_growth['performance_increase']:,} transistors")
+```
+
+These examples demonstrate how power functions are essential in modeling exponential growth, financial calculations, scientific laws, and technology trends.

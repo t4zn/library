@@ -49,3 +49,97 @@ def factorial(n):
         result *= i
     return result
 ```
+
+## Real-World Example
+
+Probability and statistics applications use factorials to calculate combinations and permutations, which are essential in risk assessment, quality control, and experimental design:
+
+```python
+from taizun import factorial
+
+# Quality control scenario in a manufacturing plant
+def calculate_lottery_probabilities(total_balls, drawn_balls):
+    """
+    Calculate the probability of winning a lottery where you need to 
+    correctly choose 'drawn_balls' from 'total_balls'
+    """
+    # Number of possible combinations = n! / (r! * (n-r)!)
+    total_combinations = factorial(total_balls) / (factorial(drawn_balls) * factorial(total_balls - drawn_balls))
+    
+    probability = 1 / total_combinations
+    
+    return {
+        "total_combinations": int(total_combinations),
+        "probability": probability,
+        "odds": f"1 in {int(total_combinations):,}"
+    }
+
+# Example: Powerball-style lottery (choose 5 numbers from 69, plus 1 from 26)
+powerball_result = calculate_lottery_probabilities(69, 5)
+powerball_powerball = calculate_lottery_probabilities(26, 1)
+
+print("Powerball Probability Analysis:")
+print("=" * 35)
+print(f"Main numbers combinations: {powerball_result['total_combinations']:,}")
+print(f"Powerball combinations: {powerball_powerball['total_combinations']:,}")
+print(f"Jackpot probability: {powerball_result['probability'] * powerball_powerball['probability']:.2e}")
+print(f"Jackpot odds: 1 in {powerball_result['total_combinations'] * powerball_powerball['total_combinations']:,}")
+
+# Manufacturing quality control example
+def calculate_defect_probabilities(total_products, defective_count, sample_size):
+    """
+    Calculate the probability of finding a certain number of defective items 
+    in a sample using hypergeometric distribution
+    """
+    # Hypergeometric probability formula involves factorials
+    # P(X = k) = (C(D,k) * C(N-D,n-k)) / C(N,n)
+    # Where C(n,r) = n! / (r! * (n-r)!)
+    
+    def combinations(n, r):
+        if r > n or r < 0:
+            return 0
+        return factorial(n) / (factorial(r) * factorial(n - r))
+    
+    total_ways = combinations(total_products, sample_size)
+    defect_ways = combinations(defective_count, 0) * combinations(total_products - defective_count, sample_size)
+    
+    probability_no_defects = defect_ways / total_ways
+    
+    return {
+        "total_ways": int(total_ways),
+        "probability_no_defects": probability_no_defects,
+        "expected_defects": sample_size * (defective_count / total_products)
+    }
+
+# Quality control scenario: 1000 products with 50 defects, sample of 20
+qc_result = calculate_defect_probabilities(1000, 50, 20)
+
+print("\nManufacturing Quality Control:")
+print("=" * 30)
+print(f"Total possible samples: {qc_result['total_ways']:,}")
+print(f"Probability of no defects in sample: {qc_result['probability_no_defects']:.2%}")
+print(f"Expected defects in sample: {qc_result['expected_defects']:.1f}")
+
+# Password security example
+def calculate_password_combinations(character_set_size, password_length):
+    """
+    Calculate the number of possible passwords
+    """
+    # For passwords with no repeated characters
+    if password_length <= character_set_size:
+        permutations = factorial(character_set_size) / factorial(character_set_size - password_length)
+        return int(permutations)
+    else:
+        return 0  # Not possible to have more characters than available without repetition
+
+# Example: 8-character password using uppercase letters (26 characters)
+password_combinations = calculate_password_combinations(26, 8)
+
+print("\nPassword Security Analysis:")
+print("=" * 25)
+print(f"Possible 8-character uppercase passwords: {password_combinations:,}")
+print(f"Time to crack at 1 million attempts/second: {password_combinations / 1_000_000:.0f} seconds")
+print(f"That's approximately {password_combinations / (1_000_000 * 3600):.1f} hours")
+```
+
+This demonstrates how factorials are essential in real-world applications involving probability, quality control, and security analysis.

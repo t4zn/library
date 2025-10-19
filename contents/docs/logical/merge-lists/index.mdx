@@ -64,3 +64,249 @@ list_one.extend(list_two)
 # Using unpacking (Python 3.5+)
 merged = [*list_one, *list_two]
 ```
+
+## Real-World Example
+
+Data processing systems and application development use list merging to combine datasets, aggregate results, and integrate information from multiple sources in various business and technical contexts:
+
+```python
+from taizun import merge_lists
+
+# E-commerce product catalog merging
+def merge_product_catalogs(catalog1, catalog2):
+    """
+    Merge product catalogs from different suppliers
+    """
+    # Merge the catalogs
+    merged_catalog = merge_lists(catalog1, catalog2)
+    
+    # Add source information
+    for product in merged_catalog:
+        if product in catalog1:
+            product['source'] = 'Supplier A'
+        else:
+            product['source'] = 'Supplier B'
+    
+    return merged_catalog
+
+# Example product catalogs
+catalog_a = [
+    {"id": 1, "name": "Laptop", "price": 999.99},
+    {"id": 2, "name": "Mouse", "price": 29.99},
+    {"id": 3, "name": "Keyboard", "price": 79.99}
+]
+
+catalog_b = [
+    {"id": 4, "name": "Monitor", "price": 299.99},
+    {"id": 5, "name": "Webcam", "price": 89.99},
+    {"id": 6, "name": "Headphones", "price": 149.99}
+]
+
+merged_catalog = merge_product_catalogs(catalog_a, catalog_b)
+
+print("Product Catalog Merging:")
+print("=" * 22)
+print("Catalog A:")
+for product in catalog_a:
+    print(f"  {product['name']} - ${product['price']}")
+
+print("\nCatalog B:")
+for product in catalog_b:
+    print(f"  {product['name']} - ${product['price']}")
+
+print("\nMerged Catalog:")
+for product in merged_catalog:
+    print(f"  {product['name']} - ${product['price']} ({product['source']})")
+
+# Social media feed aggregation
+def aggregate_social_feeds(feed1, feed2, feed3):
+    """
+    Aggregate social media feeds from different platforms
+    """
+    # Merge all feeds
+    combined_feed = merge_lists(merge_lists(feed1, feed2), feed3)
+    
+    # Sort by timestamp (newest first)
+    combined_feed.sort(key=lambda x: x['timestamp'], reverse=True)
+    
+    return combined_feed
+
+# Example social media feeds
+twitter_feed = [
+    {"platform": "Twitter", "content": "Just shipped a new feature!", "timestamp": "2023-10-15T10:30:00"},
+    {"platform": "Twitter", "content": "Check out our latest blog post", "timestamp": "2023-10-15T09:15:00"}
+]
+
+facebook_feed = [
+    {"platform": "Facebook", "content": "Team meeting at 2 PM", "timestamp": "2023-10-15T11:00:00"},
+    {"platform": "Facebook", "content": "Company picnic next week", "timestamp": "2023-10-15T08:45:00"}
+]
+
+linkedin_feed = [
+    {"platform": "LinkedIn", "content": "New job opening: Senior Developer", "timestamp": "2023-10-15T10:00:00"},
+    {"platform": "LinkedIn", "content": "Industry conference next month", "timestamp": "2023-10-15T09:30:00"}
+]
+
+aggregated_feed = aggregate_social_feeds(twitter_feed, facebook_feed, linkedin_feed)
+
+print("\nSocial Media Feed Aggregation:")
+print("=" * 29)
+print("Aggregated feed (sorted by time):")
+for post in aggregated_feed:
+    print(f"  [{post['timestamp']}] {post['platform']}: {post['content']}")
+
+# Data analysis - combining survey results
+def combine_survey_responses(survey1, survey2, survey3):
+    """
+    Combine survey responses from different demographic groups
+    """
+    # Merge all survey responses
+    all_responses = merge_lists(merge_lists(survey1, survey2), survey3)
+    
+    # Calculate overall statistics
+    total_responses = len(all_responses)
+    average_rating = sum(response['rating'] for response in all_responses) / total_responses if total_responses > 0 else 0
+    
+    # Group by category
+    category_stats = {}
+    for response in all_responses:
+        category = response['category']
+        if category not in category_stats:
+            category_stats[category] = {'count': 0, 'total_rating': 0}
+        category_stats[category]['count'] += 1
+        category_stats[category]['total_rating'] += response['rating']
+    
+    # Calculate averages per category
+    for category in category_stats:
+        category_stats[category]['average_rating'] = category_stats[category]['total_rating'] / category_stats[category]['count']
+    
+    return {
+        'all_responses': all_responses,
+        'total_responses': total_responses,
+        'overall_average': round(average_rating, 2),
+        'category_stats': category_stats
+    }
+
+# Example survey responses
+tech_survey = [
+    {"user_id": 1, "category": "Technology", "rating": 4, "feedback": "Great features"},
+    {"user_id": 2, "category": "Technology", "rating": 5, "feedback": "Excellent performance"}
+]
+
+service_survey = [
+    {"user_id": 3, "category": "Service", "rating": 3, "feedback": "Good but could be better"},
+    {"user_id": 4, "category": "Service", "rating": 4, "feedback": "Satisfied with support"}
+]
+
+price_survey = [
+    {"user_id": 5, "category": "Price", "rating": 2, "feedback": "Too expensive"},
+    {"user_id": 6, "category": "Price", "rating": 3, "feedback": "Fair pricing"}
+]
+
+combined_survey = combine_survey_responses(tech_survey, service_survey, price_survey)
+
+print("\nSurvey Response Aggregation:")
+print("=" * 27)
+print(f"Total responses: {combined_survey['total_responses']}")
+print(f"Overall average rating: {combined_survey['overall_average']}")
+
+print("\nCategory statistics:")
+for category, stats in combined_survey['category_stats'].items():
+    print(f"  {category}: {stats['count']} responses, Average rating: {stats['average_rating']:.2f}")
+
+# Task management - combining task lists
+def merge_task_lists(personal_tasks, work_tasks, project_tasks):
+    """
+    Merge task lists from different contexts
+    """
+    # Merge all tasks
+    all_tasks = merge_lists(merge_lists(personal_tasks, work_tasks), project_tasks)
+    
+    # Add context information
+    for task in all_tasks:
+        if task in personal_tasks:
+            task['context'] = 'Personal'
+        elif task in work_tasks:
+            task['context'] = 'Work'
+        else:
+            task['context'] = 'Project'
+    
+    # Sort by priority
+    priority_order = {'High': 1, 'Medium': 2, 'Low': 3}
+    all_tasks.sort(key=lambda x: priority_order.get(x.get('priority', 'Low'), 4))
+    
+    return all_tasks
+
+# Example task lists
+personal_tasks = [
+    {"id": 1, "description": "Buy groceries", "priority": "Medium"},
+    {"id": 2, "description": "Call dentist", "priority": "High"}
+]
+
+work_tasks = [
+    {"id": 3, "description": "Prepare presentation", "priority": "High"},
+    {"id": 4, "description": "Reply to emails", "priority": "Medium"}
+]
+
+project_tasks = [
+    {"id": 5, "description": "Write documentation", "priority": "Low"},
+    {"id": 6, "description": "Fix critical bug", "priority": "High"}
+]
+
+merged_tasks = merge_task_lists(personal_tasks, work_tasks, project_tasks)
+
+print("\nTask List Merging:")
+print("=" * 17)
+print("Prioritized task list:")
+for task in merged_tasks:
+    print(f"  [{task['priority']}] {task['description']} ({task['context']})")
+
+# Notification system - combining alerts
+def merge_notification_streams(system_alerts, user_notifications, security_warnings):
+    """
+    Merge different notification streams into a single feed
+    """
+    # Merge all notifications
+    all_notifications = merge_lists(merge_lists(system_alerts, user_notifications), security_warnings)
+    
+    # Add type information
+    for notification in all_notifications:
+        if notification in system_alerts:
+            notification['type'] = 'System Alert'
+        elif notification in user_notifications:
+            notification['type'] = 'User Notification'
+        else:
+            notification['type'] = 'Security Warning'
+    
+    # Sort by urgency and timestamp
+    urgency_order = {'Critical': 1, 'High': 2, 'Medium': 3, 'Low': 4}
+    all_notifications.sort(key=lambda x: (urgency_order.get(x.get('urgency', 'Low'), 5), x.get('timestamp', '')))
+    
+    return all_notifications
+
+# Example notification streams
+system_alerts = [
+    {"id": 1, "message": "Server maintenance scheduled", "urgency": "Medium", "timestamp": "2023-10-15T09:00:00"},
+    {"id": 2, "message": "Database backup completed", "urgency": "Low", "timestamp": "2023-10-15T02:00:00"}
+]
+
+user_notifications = [
+    {"id": 3, "message": "Your report is ready", "urgency": "Low", "timestamp": "2023-10-15T10:30:00"},
+    {"id": 4, "message": "Meeting reminder", "urgency": "Medium", "timestamp": "2023-10-15T10:45:00"}
+]
+
+security_warnings = [
+    {"id": 5, "message": "Unusual login activity detected", "urgency": "High", "timestamp": "2023-10-15T10:15:00"},
+    {"id": 6, "message": "Password change recommended", "urgency": "Medium", "timestamp": "2023-10-15T08:30:00"}
+]
+
+merged_notifications = merge_notification_streams(system_alerts, user_notifications, security_warnings)
+
+print("\nNotification Stream Merging:")
+print("=" * 29)
+print("Prioritized notifications:")
+for notification in merged_notifications:
+    print(f"  [{notification['urgency']}] {notification['type']}: {notification['message']}")
+```
+
+These examples demonstrate how list merging is used for product catalog integration, social media aggregation, survey analysis, task management, and notification systems in real-world applications.

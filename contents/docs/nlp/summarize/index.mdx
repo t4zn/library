@@ -24,3 +24,39 @@ Text summarization techniques fall into two main categories:
 2. **Abstractive Summarization**: Generates new sentences that capture the essence of the original text, often using natural language generation techniques. This approach can paraphrase and restructure content to create more concise summaries.
 
 The choice between extractive and abstractive methods depends on the desired balance between accuracy and fluency. Extractive methods are generally more reliable but may produce less readable summaries, while abstractive methods can generate more natural language but may introduce inaccuracies.
+
+## Real-World Example
+
+News organizations frequently use text summarization to create brief headlines and article summaries for their websites. For example, a news aggregator might process hundreds of articles daily to provide concise summaries to readers:
+
+```python
+import taizun as tz
+
+# Sample news article
+news_article = """
+Climate scientists have issued a stark warning about rising global temperatures, 
+predicting that without immediate action, the world could face catastrophic 
+consequences including extreme weather events, sea level rise, and ecosystem collapse. 
+The latest report from the Intergovernmental Panel on Climate Change (IPCC) indicates 
+that global temperatures have already risen by 1.1°C above pre-industrial levels, 
+and are on track to exceed the critical threshold of 1.5°C within the next two decades. 
+Experts emphasize that reducing carbon emissions and transitioning to renewable energy 
+sources are essential steps to mitigate these effects. Governments worldwide are being 
+urged to implement more aggressive climate policies and invest heavily in sustainable 
+technologies to prevent irreversible damage to our planet.
+"""
+
+# Generate summary
+summary = tz.summarize(news_article)
+print("Article Summary:")
+print(summary)
+
+# Output might be:
+# "Climate scientists warn of catastrophic consequences from rising global temperatures. 
+# IPCC report shows 1.1°C increase already occurred, with 1.5°C threshold expected 
+# to be exceeded within two decades. Experts recommend reducing carbon emissions and 
+# transitioning to renewable energy sources."
+```
+
+This approach helps news platforms efficiently process large volumes of content while 
+maintaining the essential information for their readers.

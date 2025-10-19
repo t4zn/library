@@ -56,3 +56,172 @@ def is_prime(n):
             return False
     return True
 ```
+
+## Real-World Example
+
+Cryptography systems and mathematical research applications use prime checking to generate secure keys, analyze number patterns, and implement efficient hashing algorithms in various security and computational contexts:
+
+```python
+from taizun import is_prime
+
+# RSA Cryptography key generation
+def generate_rsa_primes(bit_length=1024):
+    """
+    Generate prime numbers for RSA key generation
+    In practice, this would use more sophisticated methods, but demonstrates the concept
+    """
+    # For demonstration, we'll use smaller numbers
+    test_numbers = [101, 103, 107, 109, 113, 127, 131, 137, 139, 149]
+    
+    primes = []
+    for num in test_numbers:
+        if is_prime(num):
+            primes.append(num)
+    
+    return primes
+
+# Example RSA prime generation
+rsa_primes = generate_rsa_primes()
+
+print("RSA Prime Generation:")
+print("=" * 20)
+print(f"Found primes for RSA: {rsa_primes}")
+print(f"Number of primes found: {len(rsa_primes)}")
+
+# Select two primes for RSA key
+if len(rsa_primes) >= 2:
+    p, q = rsa_primes[0], rsa_primes[1]
+    n = p * q  # RSA modulus
+    print(f"Selected primes: p={p}, q={q}")
+    print(f"RSA modulus (n = p×q): {n}")
+
+# Hash table sizing optimization
+def optimize_hash_table_size(expected_elements):
+    """
+    Find an optimal prime-sized hash table to reduce collisions
+    """
+    # Start with a size roughly twice the expected elements
+    candidate_size = expected_elements * 2
+    
+    # Find the next prime number
+    while not is_prime(candidate_size):
+        candidate_size += 1
+    
+    return candidate_size
+
+# Example hash table sizing
+expected_users = 1000
+optimal_size = optimize_hash_table_size(expected_users)
+
+print("\nHash Table Optimization:")
+print("=" * 23)
+print(f"Expected elements: {expected_users}")
+print(f"Optimal table size: {optimal_size}")
+print(f"Size factor: {optimal_size / expected_users:.2f}x")
+
+# Prime gap analysis
+def analyze_prime_gaps(start, end):
+    """
+    Analyze gaps between consecutive prime numbers
+    """
+    primes = []
+    for num in range(start, end + 1):
+        if is_prime(num):
+            primes.append(num)
+    
+    gaps = []
+    for i in range(1, len(primes)):
+        gap = primes[i] - primes[i-1]
+        gaps.append(gap)
+    
+    if gaps:
+        avg_gap = sum(gaps) / len(gaps)
+        max_gap = max(gaps)
+        return {
+            "primes": primes,
+            "gaps": gaps,
+            "average_gap": round(avg_gap, 2),
+            "max_gap": max_gap
+        }
+    else:
+        return {"primes": [], "gaps": [], "average_gap": 0, "max_gap": 0}
+
+# Analyze prime gaps in a range
+gap_analysis = analyze_prime_gaps(1, 100)
+
+print("\nPrime Gap Analysis:")
+print("=" * 18)
+print(f"Primes between 1-100: {gap_analysis['primes']}")
+print(f"Gaps between consecutive primes: {gap_analysis['gaps']}")
+print(f"Average gap: {gap_analysis['average_gap']}")
+print(f"Maximum gap: {gap_analysis['max_gap']}")
+
+# Cryptographic security assessment
+def assess_key_strength(number):
+    """
+    Assess the strength of a number for cryptographic use based on primality
+    """
+    if is_prime(number):
+        # Check if it's a safe prime (p = 2q + 1 where q is also prime)
+        if (number - 1) % 2 == 0:
+            q = (number - 1) // 2
+            if is_prime(q):
+                return {
+                    "is_prime": True,
+                    "strength": "Strong - Safe prime",
+                    "safe_prime_q": q
+                }
+        
+        return {
+            "is_prime": True,
+            "strength": "Good - Standard prime",
+            "safe_prime_q": None
+        }
+    else:
+        return {
+            "is_prime": False,
+            "strength": "Weak - Not prime",
+            "safe_prime_q": None
+        }
+
+# Assess various numbers for cryptographic use
+test_numbers = [101, 102, 103, 107, 2147483647]  # Last one is a Mersenne prime
+
+print("\nCryptographic Key Assessment:")
+print("=" * 28)
+for num in test_numbers:
+    assessment = assess_key_strength(num)
+    print(f"Number: {num}")
+    print(f"  Prime: {assessment['is_prime']}")
+    print(f"  Strength: {assessment['strength']}")
+    if assessment['safe_prime_q']:
+        print(f"  Safe prime Q: {assessment['safe_prime_q']}")
+    print()
+
+# Mathematical research - twin primes
+def find_twin_primes(limit):
+    """
+    Find twin prime pairs (primes that differ by 2)
+    """
+    primes = []
+    for num in range(2, limit + 1):
+        if is_prime(num):
+            primes.append(num)
+    
+    twin_pairs = []
+    for i in range(len(primes) - 1):
+        if primes[i+1] - primes[i] == 2:
+            twin_pairs.append((primes[i], primes[i+1]))
+    
+    return twin_pairs
+
+# Find twin primes
+twin_primes = find_twin_primes(100)
+
+print("Twin Prime Research:")
+print("=" * 19)
+print(f"Twin prime pairs up to 100: {twin_primes}")
+print(f"Number of twin prime pairs: {len(twin_primes)}")
+```
+
+These examples demonstrate how prime checking is used in cryptography, hash table optimization, mathematical research, and security assessment in real-world applications.

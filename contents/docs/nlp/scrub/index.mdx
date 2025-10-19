@@ -26,3 +26,61 @@ Stopword removal is a text preprocessing technique used in natural language proc
 3. **Language Considerations**: Different languages have different sets of stopwords. For example, English stopwords include "the", "and", "or", while other languages have their own common function words.
 
 The effectiveness of stopword removal depends on the specific application. While it's beneficial for tasks like keyword extraction and topic modeling, it may be detrimental for sentiment analysis where words like "not" can change the meaning of a sentence.
+
+## Real-World Example
+
+Search engines use stopword removal to improve search efficiency and relevance. By eliminating common words, they can focus on the more meaningful terms in user queries:
+
+```python
+import taizun as tz
+
+# User search queries from an e-commerce website
+search_queries = [
+    "best smartphones under 500 dollars",
+    "how to cook pasta with tomato sauce",
+    "the weather in New York this week",
+    "buy running shoes for men on sale",
+    "what is the capital of France"
+]
+
+print("Search Query Optimization:")
+print("=" * 30)
+
+for query in search_queries:
+    # Remove stopwords to focus on key terms
+    optimized_query = tz.scrub(query)
+    
+    print(f"Original: {query}")
+    print(f"Optimized: {optimized_query}")
+    print("-" * 40)
+
+# Output might be:
+# Original: best smartphones under 500 dollars
+# Optimized: best smartphones 500 dollars
+# 
+# Original: how to cook pasta with tomato sauce
+# Optimized: cook pasta tomato sauce
+# 
+# Original: the weather in New York this week
+# Optimized: weather New York week
+
+# Use optimized queries for indexing
+optimized_queries = [tz.scrub(query) for query in search_queries]
+
+# Extract keywords for search indexing
+all_keywords = []
+for query in optimized_queries:
+    keywords = query.split()
+    all_keywords.extend(keywords)
+
+# Remove duplicates while preserving order
+unique_keywords = list(dict.fromkeys(all_keywords))
+
+print("Unique Keywords for Indexing:")
+print(unique_keywords)
+# Might output: ['best', 'smartphones', '500', 'dollars', 'cook', 'pasta', 'tomato', 
+#               'sauce', 'weather', 'New', 'York', 'week', 'buy', 'running', 'shoes', 
+#               'men', 'sale', 'capital', 'France']
+```
+
+This optimization helps search engines deliver more relevant results by focusing on the core terms that define user intent, while significantly reducing the size of the search index.

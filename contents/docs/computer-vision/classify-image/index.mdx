@@ -26,3 +26,73 @@ Image classification involves training a model to recognize specific patterns an
 3. **Vision Transformers**: Recent advances use transformer architectures adapted for vision tasks. Vision Transformers (ViT) divide images into patches and process them with self-attention mechanisms, often achieving state-of-the-art results.
 
 The training process requires a large dataset of labeled images. Data augmentation techniques like rotation, scaling, and color adjustments are often used to improve model generalization. Transfer learning, where a pre-trained model is fine-tuned on a specific task, is commonly used to achieve good results with limited data.
+
+## Real-World Example
+
+Medical imaging systems use image classification to automatically detect abnormalities in X-rays, MRIs, and other diagnostic images, helping radiologists identify potential health issues more efficiently:
+
+```python
+import taizun as tz
+
+# Medical X-ray images for classification
+xray_images = [
+    "patient_001_chest_xray.jpg",
+    "patient_002_chest_xray.jpg",
+    "patient_003_chest_xray.jpg",
+    "patient_004_chest_xray.jpg",
+    "patient_005_chest_xray.jpg"
+]
+
+print("Automated Medical Image Classification:")
+print("=" * 40)
+
+# Process each X-ray image
+results = []
+for image_path in xray_images:
+    try:
+        # Classify the medical image
+        classification = tz.classify_image(image_path)
+        confidence = 0.95  # Simulated confidence score
+        
+        print(f"Patient Image: {image_path}")
+        print(f"Diagnosis: {classification}")
+        print(f"Confidence: {confidence:.2%}")
+        print("-" * 30)
+        
+        results.append({
+            "patient": image_path,
+            "diagnosis": classification,
+            "confidence": confidence
+        })
+        
+        # Flag potentially critical cases
+        if classification in ["Pneumonia", "Lung Cancer", "Cardiomegaly"] and confidence > 0.8:
+            print("⚠️  ALERT: Critical finding detected - Requires immediate radiologist review")
+        elif classification in ["Emphysema", "Pleural Effusion"] and confidence > 0.7:
+            print("⚠️  NOTICE: Significant finding - Should be reviewed by radiologist")
+            
+    except Exception as e:
+        print(f"Error processing {image_path}: {str(e)}")
+    
+    print()
+
+# Generate diagnostic report
+normal_cases = [r for r in results if r["diagnosis"] == "Normal"]
+abnormal_cases = [r for r in results if r["diagnosis"] != "Normal"]
+
+print("Diagnostic Summary:")
+print("=" * 20)
+print(f"Total cases processed: {len(results)}")
+print(f"Normal findings: {len(normal_cases)}")
+print(f"Abnormal findings: {len(abnormal_cases)}")
+print(f"Accuracy rate: {(len(normal_cases) * 0.95 + len(abnormal_cases) * 0.90) / len(results):.1%}")
+
+# Prioritize cases for review
+high_confidence_abnormal = [r for r in abnormal_cases if r["confidence"] > 0.9]
+print(f"\nHigh-confidence abnormal cases requiring immediate review: {len(high_confidence_abnormal)}")
+
+for case in high_confidence_abnormal:
+    print(f"  - {case['patient']}: {case['diagnosis']} ({case['confidence']:.1%} confidence)")
+```
+
+This automated classification system helps medical professionals prioritize cases, reduce diagnostic time, and ensure critical findings are not overlooked in busy clinical environments.

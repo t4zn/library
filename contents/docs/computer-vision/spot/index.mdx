@@ -36,3 +36,73 @@ The main approaches to object detection are:
 3. **Transformer-Based Detectors**: Recent approaches like DETR (DEtection TRansformer) use transformer architectures for end-to-end object detection.
 
 Modern object detection systems achieve real-time performance with high accuracy, making them suitable for applications like autonomous driving, surveillance, and robotics.
+
+## Real-World Example
+
+Autonomous vehicles and traffic monitoring systems use object detection to identify and track vehicles, pedestrians, and other objects in real-time for safe navigation and traffic analysis:
+
+```python
+import taizun as tz
+
+# Traffic camera images for analysis
+traffic_images = [
+    "intersection_01.jpg",
+    "highway_01.jpg",
+    "pedestrian_crossing_01.jpg",
+    "parking_lot_01.jpg"
+]
+
+print("Traffic Monitoring and Analysis:")
+print("=" * 35)
+
+# Process each traffic image
+for image_path in traffic_images:
+    try:
+        # Detect objects in the traffic scene
+        detected_objects = tz.spot(image_path)
+        
+        print(f"Scene: {image_path}")
+        print("Detected Objects:")
+        
+        # Categorize detected objects
+        vehicles = [obj for obj in detected_objects if obj in ["car", "truck", "bus", "motorcycle"]]
+        pedestrians = [obj for obj in detected_objects if obj in ["person", "pedestrian"]]
+        traffic_signs = [obj for obj in detected_objects if obj in ["traffic light", "stop sign", "traffic sign"]]
+        bicycles = [obj for obj in detected_objects if obj in ["bicycle", "bike"]]
+        
+        print(f"  Vehicles: {len(vehicles)} ({', '.join(vehicles) if vehicles else 'None'})")
+        print(f"  Pedestrians: {len(pedestrians)} ({', '.join(pedestrians) if pedestrians else 'None'})")
+        print(f"  Traffic Signs: {len(traffic_signs)} ({', '.join(traffic_signs) if traffic_signs else 'None'})")
+        print(f"  Bicycles: {len(bicycles)} ({', '.join(bicycles) if bicycles else 'None'})")
+        
+        # Traffic density analysis
+        total_objects = len(detected_objects)
+        vehicle_density = len(vehicles) / total_objects if total_objects > 0 else 0
+        
+        print(f"  Total Objects: {total_objects}")
+        print(f"  Vehicle Density: {vehicle_density:.1%}")
+        
+        # Safety alerts
+        if len(pedestrians) > 0 and len(vehicles) > 3:
+            print("  ⚠️  Safety Alert: High pedestrian-vehicle interaction area")
+        if len(traffic_signs) == 0:
+            print("  ⚠️  Notice: No traffic signs detected - potential signage issue")
+        if len(bicycles) > 2:
+            print("  ℹ️  Info: High bicycle activity area")
+            
+    except Exception as e:
+        print(f"Error processing {image_path}: {str(e)}")
+    
+    print("-" * 40)
+
+# Generate traffic report
+print("Traffic Analysis Summary:")
+print("=" * 25)
+print("This system helps traffic engineers:")
+print("1. Optimize traffic light timing based on vehicle density")
+print("2. Identify high-risk intersections for pedestrian safety")
+print("3. Plan infrastructure improvements for bicycle lanes")
+print("4. Monitor traffic patterns for urban planning")
+```
+
+This object detection system enables smart city infrastructure to automatically monitor traffic conditions, improve safety, and optimize traffic flow without human intervention.

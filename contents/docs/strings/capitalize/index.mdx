@@ -56,3 +56,255 @@ def capitalize(text):
         return text
     return text[0].upper() + text[1:].lower()
 ```
+
+## Real-World Example
+
+User interface applications and data processing systems use capitalization to format names, titles, and user-generated content for professional presentation in various business and technical contexts:
+
+```python
+from taizun import capitalize
+
+# User profile data formatting
+def format_user_profiles(user_data):
+    """
+    Format user profile data with proper capitalization
+    """
+    formatted_profiles = []
+    
+    for user in user_data:
+        # Capitalize name fields
+        formatted_first_name = capitalize(user['first_name'])
+        formatted_last_name = capitalize(user['last_name'])
+        full_name = f"{formatted_first_name} {formatted_last_name}"
+        
+        # Capitalize city names
+        formatted_city = capitalize(user['city'])
+        
+        # Capitalize job titles
+        formatted_job_title = capitalize(user['job_title'])
+        
+        formatted_profiles.append({
+            "id": user['id'],
+            "first_name": formatted_first_name,
+            "last_name": formatted_last_name,
+            "full_name": full_name,
+            "email": user['email'],  # Keep email as-is
+            "city": formatted_city,
+            "job_title": formatted_job_title,
+            "formatted_display": f"{full_name} - {formatted_job_title}, {formatted_city}"
+        })
+    
+    return formatted_profiles
+
+# Example user data with inconsistent capitalization
+user_data = [
+    {"id": 1, "first_name": "john", "last_name": "SMITH", "email": "john.smith@example.com", "city": "new york", "job_title": "software engineer"},
+    {"id": 2, "first_name": "ALICE", "last_name": "johnson", "email": "alice.johnson@example.com", "city": "LOS ANGELES", "job_title": "DATA SCIENTIST"},
+    {"id": 3, "first_name": "bob", "last_name": "WILSON", "email": "bob.wilson@example.com", "city": "chicago", "job_title": "PRODUCT MANAGER"}
+]
+
+formatted_users = format_user_profiles(user_data)
+
+print("User Profile Formatting:")
+print("=" * 22)
+for user in formatted_users:
+    print(f"ID: {user['id']}")
+    print(f"Name: {user['full_name']}")
+    print(f"Email: {user['email']}")
+    print(f"Location: {user['city']}")
+    print(f"Title: {user['job_title']}")
+    print(f"Display: {user['formatted_display']}")
+    print()
+
+# Document title formatting
+def format_document_titles(titles):
+    """
+    Format document titles with proper capitalization
+    """
+    formatted_titles = []
+    
+    for title in titles:
+        # Apply capitalization
+        formatted_title = capitalize(title)
+        
+        # Additional formatting (e.g., removing extra spaces)
+        cleaned_title = ' '.join(formatted_title.split())
+        
+        formatted_titles.append({
+            "original": title,
+            "formatted": cleaned_title,
+            "word_count": len(cleaned_title.split())
+        })
+    
+    return formatted_titles
+
+# Example document titles with inconsistent formatting
+document_titles = [
+    "annual REPORT 2023",
+    "user MANUAL for beginners",
+    "technical SPECIFICATIONS document",
+    "financial STATEMENTS analysis",
+    "marketing STRATEGY overview"
+]
+
+formatted_titles = format_document_titles(document_titles)
+
+print("Document Title Formatting:")
+print("=" * 24)
+print("Title formatting results:")
+for title in formatted_titles:
+    print(f"  Original: '{title['original']}'")
+    print(f"  Formatted: '{title['formatted']}'")
+    print(f"  Word count: {title['word_count']}")
+    print()
+
+# Blog post content processing
+def process_blog_post_titles(posts):
+    """
+    Process blog post titles for consistent formatting
+    """
+    processed_posts = []
+    
+    for post in posts:
+        # Extract and format the title
+        original_title = post['title']
+        formatted_title = capitalize(original_title)
+        
+        # Create URL-friendly slug (simplified)
+        slug = original_title.lower().replace(' ', '-').replace('--', '-')
+        
+        processed_posts.append({
+            "id": post['id'],
+            "original_title": original_title,
+            "formatted_title": formatted_title,
+            "slug": slug,
+            "author": post['author'],
+            "publish_date": post['publish_date'],
+            "read_time": post['read_time']
+        })
+    
+    return processed_posts
+
+# Example blog posts
+blog_posts = [
+    {"id": 1, "title": "introduction to machine learning", "author": "Dr. Smith", "publish_date": "2023-10-15", "read_time": "5 min"},
+    {"id": 2, "title": "ADVANCED deep learning techniques", "author": "Prof. Johnson", "publish_date": "2023-10-10", "read_time": "12 min"},
+    {"id": 3, "title": "python programming basics", "author": "Alice Wilson", "publish_date": "2023-10-05", "read_time": "8 min"}
+]
+
+processed_posts = process_blog_post_titles(blog_posts)
+
+print("Blog Post Title Processing:")
+print("=" * 26)
+for post in processed_posts:
+    print(f"Post ID: {post['id']}")
+    print(f"  Original: '{post['original_title']}'")
+    print(f"  Formatted: '{post['formatted_title']}'")
+    print(f"  Slug: {post['slug']}")
+    print(f"  Author: {post['author']}")
+    print(f"  Published: {post['publish_date']} ({post['read_time']})")
+    print()
+
+# Customer feedback analysis
+def analyze_customer_feedback(feedback_list):
+    """
+    Analyze customer feedback with proper formatting
+    """
+    analyzed_feedback = []
+    
+    for feedback in feedback_list:
+        # Format customer name
+        customer_name = feedback.get('customer_name', 'Anonymous')
+        formatted_name = capitalize(customer_name) if customer_name != 'Anonymous' else customer_name
+        
+        # Format feedback category
+        category = feedback.get('category', 'general')
+        formatted_category = capitalize(category)
+        
+        # Keep feedback text as-is (preserve original sentiment)
+        feedback_text = feedback.get('feedback', '')
+        
+        analyzed_feedback.append({
+            "customer_name": formatted_name,
+            "category": formatted_category,
+            "feedback": feedback_text,
+            "rating": feedback.get('rating', 0),
+            "date": feedback.get('date', 'Unknown')
+        })
+    
+    return analyzed_feedback
+
+# Example customer feedback
+customer_feedback = [
+    {"customer_name": "mary johnson", "category": "product quality", "feedback": "Great product, very satisfied!", "rating": 5, "date": "2023-10-15"},
+    {"customer_name": "ROBERT BROWN", "category": "CUSTOMER SERVICE", "feedback": "Could improve response time", "rating": 3, "date": "2023-10-14"},
+    {"customer_name": "lisa davis", "category": "pricing", "feedback": "Fair prices for quality", "rating": 4, "date": "2023-10-13"}
+]
+
+analyzed_feedback = analyze_customer_feedback(customer_feedback)
+
+print("Customer Feedback Analysis:")
+print("=" * 25)
+print("Formatted feedback entries:")
+for feedback in analyzed_feedback:
+    print(f"  From: {feedback['customer_name']}")
+    print(f"  Category: {feedback['category']}")
+    print(f"  Rating: {feedback['rating']}/5")
+    print(f"  Feedback: {feedback['feedback']}")
+    print(f"  Date: {feedback['date']}")
+    print()
+
+# Report generation formatting
+def generate_formatted_reports(report_data):
+    """
+    Generate formatted reports with proper capitalization
+    """
+    formatted_reports = []
+    
+    for report in report_data:
+        # Format report name
+        report_name = report['name']
+        formatted_name = capitalize(report_name)
+        
+        # Format department name
+        department = report['department']
+        formatted_department = capitalize(department)
+        
+        # Format metrics names
+        formatted_metrics = {}
+        for metric, value in report['metrics'].items():
+            formatted_metric = capitalize(metric.replace('_', ' '))
+            formatted_metrics[formatted_metric] = value
+        
+        formatted_reports.append({
+            "id": report['id'],
+            "name": formatted_name,
+            "department": formatted_department,
+            "metrics": formatted_metrics,
+            "generated_date": report['generated_date']
+        })
+    
+    return formatted_reports
+
+# Example report data
+reports = [
+    {"id": 1, "name": "quarterly sales report", "department": "marketing", "metrics": {"total_revenue": 1250000, "new_customers": 1250, "conversion_rate": 3.2}, "generated_date": "2023-10-15"},
+    {"id": 2, "name": "user engagement ANALYSIS", "department": "PRODUCT", "metrics": {"active_users": 50000, "session_duration": 8.5, "retention_rate": 78}, "generated_date": "2023-10-15"}
+]
+
+formatted_reports = generate_formatted_reports(reports)
+
+print("Report Generation Formatting:")
+print("=" * 27)
+for report in formatted_reports:
+    print(f"Report ID: {report['id']}")
+    print(f"  Name: {report['name']}")
+    print(f"  Department: {report['department']}")
+    print(f"  Generated: {report['generated_date']}")
+    print("  Metrics:")
+    for metric, value in report['metrics'].items():
+        print(f"    {metric}: {value}")
+    print()
+```
+
+These examples demonstrate how capitalization is used for user profile formatting, document titles, blog posts, customer feedback analysis, and report generation in real-world applications.
