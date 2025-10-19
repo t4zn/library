@@ -1,0 +1,168 @@
+---
+title: Performance Optimization
+description: Tips and techniques for optimizing Taizun performance with large datasets.
+---
+
+## Efficient Data Processing
+
+When working with large datasets, consider these optimization strategies:
+
+```python
+import taizun as tz
+
+# Process data in batches instead of one by one
+def batch_process_texts(texts, batch_size=100):
+    """Process texts in batches for better performance"""
+    results = []
+    
+    for i in range(0, len(texts), batch_size):
+        batch = texts[i:i + batch_size]
+        batch_results = []
+        
+        # Process each item in the batch
+        for text in batch:
+            summary = tz.summarize(text)
+            sentiment = tz.moodscan(text)
+            batch_results.append({
+                'summary': summary,
+                'sentiment': sentiment
+            })
+        
+        results.extend(batch_results)
+        print(f"Processed batch {i//batch_size + 1}")
+    
+    return results
+
+# Example usage with large dataset
+# large_text_collection = ["text1", "text2", ...]  # Thousands of texts
+# results = batch_process_texts(large_text_collection)
+```
+
+## Memory Management
+
+Manage memory efficiently when processing large amounts of data:
+
+```python
+import taizun as tz
+
+def process_with_cleanup(texts):
+    """Process texts with periodic cleanup"""
+    
+    results = []
+    for i, text in enumerate(texts):
+        # Process the text
+        summary = tz.summarize(text)
+        sentiment = tz.moodscan(text)
+        
+        results.append({
+            'summary': summary,
+            'sentiment': sentiment
+        })
+        
+        # Periodic cleanup every 100 items
+        if i % 100 == 0:
+            # Force garbage collection if needed
+            import gc
+            gc.collect()
+            print(f"Processed {i} items, memory cleaned")
+    
+    return results
+```
+
+## Parallel Processing
+
+For CPU-intensive tasks, consider parallel processing:
+
+```python
+import taizun as tz
+from concurrent.futures import ThreadPoolExecutor
+import os
+
+def process_single_image(image_path):
+    """Process a single image"""
+    try:
+        label = tz.classify_image(image_path)
+        caption = tz.imagecaption(image_path)
+        objects = tz.spot(image_path)
+        
+        return {
+            'filename': os.path.basename(image_path),
+            'label': label,
+            'caption': caption,
+            'objects': objects
+        }
+    except Exception as e:
+        return {
+            'filename': os.path.basename(image_path),
+            'error': str(e)
+        }
+
+def parallel_image_processing(image_paths, max_workers=4):
+    """Process images in parallel"""
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        results = list(executor.map(process_single_image, image_paths))
+    
+    return results
+
+# Example usage
+# image_paths = ["img1.jpg", "img2.jpg", "img3.jpg", ...]
+# results = parallel_image_processing(image_paths)
+```
+
+## Caching Strategies
+
+Cache results to avoid reprocessing the same data:
+
+```python
+import taizun as tz
+import pickle
+import os
+
+class TextProcessor:
+    def __init__(self, cache_dir="./cache"):
+        self.cache_dir = cache_dir
+        os.makedirs(cache_dir, exist_ok=True)
+    
+    def _get_cache_path(self, text):
+        """Generate cache file path for text"""
+        # Create a simple hash of the text for filename
+        import hashlib
+        text_hash = hashlib.md5(text.encode()).hexdigest()
+        return os.path.join(self.cache_dir, f"{text_hash}.pkl")
+    
+    def process_text(self, text):
+        """Process text with caching"""
+        cache_path = self._get_cache_path(text)
+        
+        # Check if cached result exists
+        if os.path.exists(cache_path):
+            with open(cache_path, 'rb') as f:
+                return pickle.load(f)
+        
+        # Process the text
+        result = {
+            'summary': tz.summarize(text),
+            'sentiment': tz.moodscan(text),
+            'entities': tz.labels(text),
+            'wordcount': tz.wordcount(text)
+        }
+        
+        # Cache the result
+        with open(cache_path, 'wb') as f:
+            pickle.dump(result, f)
+        
+        return result
+
+# Example usage
+# processor = TextProcessor()
+# result = processor.process_text("Your text here...")
+```
+
+## Best Practices Summary
+
+1. **Batch processing**: Group items together to reduce overhead
+2. **Memory management**: Clean up resources periodically
+3. **Parallel execution**: Use multiple threads for I/O-bound tasks
+4. **Caching**: Store results to avoid redundant processing
+5. **Progress tracking**: Monitor long-running operations
+6. **Error handling**: Gracefully handle failures in large datasets

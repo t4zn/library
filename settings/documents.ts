@@ -24,29 +24,25 @@ export const Documents: Paths[] = [
     spacer: true,
   },
   {
-    title: "Navigation",
-    href: "/navigation",
-    heading: "Documents",
-  },
-  {
-    title: "Structure",
-    href: "/structure",
+    title: "Usage Guide",
+    href: "/usage-guide",
+    heading: "Core Concepts",
     items: [
       {
-        title: "Deep",
-        href: "/deep",
-        items: [
-          {
-            title: "Deeper",
-            href: "/deeper",
-            items: [
-              {
-                title: "Even deeper",
-                href: "/even-deeper",
-              },
-            ],
-          },
-        ],
+        title: "Basic Usage Patterns",
+        href: "/basic-usage",
+      },
+      {
+        title: "Working with Text Data",
+        href: "/text-processing",
+      },
+      {
+        title: "Image Processing Workflow",
+        href: "/image-processing",
+      },
+      {
+        title: "Performance Optimization",
+        href: "/performance-tips",
       },
     ],
   },
@@ -54,33 +50,29 @@ export const Documents: Paths[] = [
     spacer: true,
   },
   {
-    title: "NLP",
+    title: "NLP Functions",
     href: "/nlp",
-    heading: "Features",
+    heading: "Function Reference",
     items: [
       {
         title: "Text Summarization",
-        href: "/text-summarization",
-      },
-      {
-        title: "Named Entity Recognition",
-        href: "/named-entity-recognition",
-      },
-      {
-        title: "Text Generation",
-        href: "/text-generation",
+        href: "/summarize",
       },
       {
         title: "Sentiment Analysis",
-        href: "/sentiment-analysis",
+        href: "/moodscan",
+      },
+      {
+        title: "Named Entity Recognition",
+        href: "/labels",
       },
       {
         title: "Remove Stopwords",
-        href: "/remove-stopwords",
+        href: "/scrub",
       },
       {
         title: "Word Frequency Analysis",
-        href: "/word-frequency-analysis",
+        href: "/wordcount",
       },
     ],
   },
@@ -90,7 +82,7 @@ export const Documents: Paths[] = [
     items: [
       {
         title: "Generate Image Caption",
-        href: "/generate-image-caption",
+        href: "/imagecaption",
       },
       {
         title: "Classify Image",
@@ -98,7 +90,7 @@ export const Documents: Paths[] = [
       },
       {
         title: "Detect Objects",
-        href: "/detect-objects",
+        href: "/spot",
       },
       {
         title: "Resize Image",
@@ -106,7 +98,7 @@ export const Documents: Paths[] = [
       },
       {
         title: "Convert to Grayscale",
-        href: "/convert-to-grayscale",
+        href: "/grayscale",
       },
     ],
   },

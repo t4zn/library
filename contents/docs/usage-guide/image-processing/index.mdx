@@ -1,0 +1,129 @@
+---
+title: Image Processing Workflow
+description: Learn how to effectively process images with Taizun's Computer Vision functions.
+---
+
+## Basic Image Processing
+
+Taizun provides a simple interface for common image processing tasks:
+
+```python
+import taizun as tz
+
+# Basic image classification
+label = tz.classify_image("path/to/image.jpg")
+print(f"Image contains: {label}")
+
+# Generate a caption for an image
+caption = tz.imagecaption("path/to/image.jpg")
+print(f"Caption: {caption}")
+
+# Detect objects in an image
+objects = tz.spot("path/to/image.jpg")
+print(f"Detected objects: {objects}")
+```
+
+## Image Preprocessing Pipeline
+
+Prepare images for analysis with preprocessing functions:
+
+```python
+import taizun as tz
+
+def preprocess_image(input_path, output_path):
+    """Preprocess an image for better analysis results"""
+    
+    # Resize to standard dimensions
+    tz.resize_image(input_path, f"{output_path}_resized.jpg", size=(512, 512))
+    
+    # Convert to grayscale if needed
+    tz.grayscale(f"{output_path}_resized.jpg", f"{output_path}_grayscale.jpg")
+    
+    return f"{output_path}_grayscale.jpg"
+
+# Example usage
+processed_image = preprocess_image("input.jpg", "output")
+```
+
+## Batch Image Processing
+
+Process multiple images efficiently:
+
+```python
+import taizun as tz
+import os
+
+def process_image_directory(directory):
+    """Process all images in a directory"""
+    results = []
+    
+    for filename in os.listdir(directory):
+        if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
+            filepath = os.path.join(directory, filename)
+            
+            try:
+                # Classify the image
+                label = tz.classify_image(filepath)
+                
+                # Generate a caption
+                caption = tz.imagecaption(filepath)
+                
+                # Detect objects
+                objects = tz.spot(filepath)
+                
+                results.append({
+                    'filename': filename,
+                    'label': label,
+                    'caption': caption,
+                    'objects': objects
+                })
+                
+            except Exception as e:
+                print(f"Error processing {filename}: {e}")
+    
+    return results
+
+# Example usage
+# results = process_image_directory("./images")
+```
+
+## Advanced Image Analysis
+
+Combine multiple Computer Vision functions for comprehensive analysis:
+
+```python
+import taizun as tz
+
+def comprehensive_image_analysis(image_path):
+    """Perform comprehensive analysis on an image"""
+    
+    # Get basic classification
+    label = tz.classify_image(image_path)
+    
+    # Generate descriptive caption
+    caption = tz.imagecaption(image_path)
+    
+    # Detect and locate objects
+    objects = tz.spot(image_path)
+    
+    # Preprocess for better results (if needed)
+    # tz.resize_image(image_path, "temp_resized.jpg", size=(512, 512))
+    
+    return {
+        'classification': label,
+        'description': caption,
+        'objects': objects
+    }
+
+# Example usage
+# analysis = comprehensive_image_analysis("photo.jpg")
+# print(analysis)
+```
+
+## Best Practices
+
+1. **Standardize input sizes**: Resize images to consistent dimensions for better results
+2. **Handle exceptions**: Image processing can fail with corrupted files
+3. **Preprocess when needed**: Grayscale conversion and resizing can improve accuracy
+4. **Batch processing**: Process multiple images together for efficiency
+5. **Memory management**: Clean up temporary files after processing

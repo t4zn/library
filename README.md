@@ -1,60 +1,67 @@
-# Documents
+# Taizun
 
-Documents is a modern documentation starter kit built with **Next.js**, **React**, **Tailwind CSS**, and **TypeScript**. Designed for businesses, product teams, and technical writers, it provides a scalable and efficient foundation for building documentation websites, product manuals, and knowledge bases.
+Taizun is a Python library that simplifies machine learning tasks by providing utility functions for Natural Language Processing (NLP) and Computer Vision.
 
-> **Demo**: [https://rubix-documents.vercel.app](https://rubix-documents.vercel.app)
+> **Demo**: [https://taizun.vercel.app](https://taizun.vercel.app)
 
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Top Language](https://img.shields.io/github/languages/top/t4zn/rubix-documents)](https://github.com/t4zn/rubix-documents)
+[![Top Language](https://img.shields.io/github/languages/top/t4zn/taizun)](https://github.com/t4zn/taizun)
 
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/t4zn/rubix-documents)
-[![Last Commit](https://img.shields.io/github/last-commit/t4zn/rubix-documents)](https://github.com/t4zn/rubix-documents/commits)
-[![GitHub issues](https://img.shields.io/github/issues/t4zn/rubix-documents)](https://github.com/t4zn/rubix-documents/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/t4zn/rubix-documents)](https://github.com/t4zn/rubix-documents/pulls)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/t4zn/taizun)
+[![Last Commit](https://img.shields.io/github/last-commit/t4zn/taizun)](https://github.com/t4zn/taizun/commits)
+[![GitHub issues](https://img.shields.io/github/issues/t4zn/taizun)](https://github.com/t4zn/taizun/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/t4zn/taizun)](https://github.com/t4zn/taizun/pulls)
 
-[![GitHub stars](https://img.shields.io/github/stars/t4zn/rubix-documents)](https://github.com/t4zn/rubix-documents/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/t4zn/rubix-documents)](https://github.com/t4zn/rubix-documents/network)
-[![GitHub repo size](https://img.shields.io/github/repo-size/t4zn/rubix-documents)](https://github.com/t4zn/rubix-documents)
+[![GitHub stars](https://img.shields.io/github/stars/t4zn/taizun)](https://github.com/t4zn/taizun/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/t4zn/taizun)](https://github.com/t4zn/taizun/network)
+[![GitHub repo size](https://img.shields.io/github/repo-size/t4zn/taizun)](https://github.com/t4zn/taizun)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ft4zn%2Frubix-documents&project-name=my-documents&repository-name=my-documents&demo-title=Documents&demo-description=This%20Document%20Starter%20Kit%20is%20developed%20with%20Next.js%2C%20Tailwind%20CSS%20and%20TypeScript.%20It%20serves%20as%20a%20flexible%20and%20scalable%20foundation%20for%20building%20documentation%20websites%20or%20content-driven%20projects.&demo-url=https%3A%2F%2Frubix-documents.vercel.app%2F&demo-image=https%3A%2F%2Fgithub.com%2Ft4zn%2Frubix-documents%2Fblob%2Fmain%2Fpublic%2Fscreens%2Fscreen-1.png)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ft4zn%2Ftaizun&project-name=taizun&repository-name=taizun&demo-title=Taizun&demo-description=Taizun%20is%20a%20Python%20library%20that%20simplifies%20machine%20learning%20tasks%20by%20providing%20utility%20functions%20for%20Natural%20Language%20Processing%20(NLP)%20and%20Computer%20Vision.&demo-url=https%3A%2F%2Ftaizun.vercel.app%2F&demo-image=https%3A%2F%2Fgithub.com%2Ft4zn%2Ftaizun%2Fblob%2Fmain%2Fpublic%2Fscreens%2Fscreen-1.png)
 
 ---
 
 ## Overview
 
-Documents enables businesses to deliver clear, structured, and accessible product documentation — with a focus on performance, usability, and maintainability.
+Taizun enables developers to accelerate their machine learning workflows with ready-to-use functions for NLP and Computer Vision tasks.
 
-Built for technical and content-driven projects, this starter kit supports Markdown (MDX), React components, and a flexible content architecture designed for scale.
+Built for Python developers, this library supports common machine learning operations with a focus on simplicity and efficiency.
 
 ---
 
 ## Features
 
-### Content Management
+### Natural Language Processing
 
-- MDX support (Markdown with React components)
-- Reusable custom components
-- Mermaid.js for diagrams and flowcharts
-- Tables and LaTeX math support
+- Text preprocessing and cleaning
+- Named Entity Recognition
+- Sentiment Analysis
+- Text Summarization
+- Word Frequency Analysis
 
-### Navigation & Structure
+### Computer Vision
 
-- Multi-level navigation
-- Auto-generated table of contents
-- Content pagination
-- Code snippet switcher with copy functionality
+- Image classification
+- Object detection
+- Image captioning
+- Basic image processing
 
-### Development Experience
+### Mathematical Operations
 
-- Syntax highlighting with theme support
-- Enhanced code blocks with titles and line highlighting
-- Built-in light/dark mode with auto-detection
-- SEO-ready with dynamic meta tags
+- Calculator functions
+- Statistical operations
+- Mathematical utilities
 
-### Search & Future Enhancements
+### String Processing
 
-- Fuzzy search with term highlighting
-- Planned: AI-powered knowledgebase tools
+- Text manipulation
+- String formatting
+- Pattern matching
+
+### Logical Operations
+
+- Data validation
+- Type checking
+- List operations
 
 ---
 
@@ -63,8 +70,8 @@ Built for technical and content-driven projects, this starter kit supports Markd
 ### Installation
 
 ```bash
-git clone https://github.com/t4zn/rubix-documents.git
-cd rubix-documents
+git clone https://github.com/t4zn/taizun.git
+cd taizun
 pnpm install
 pnpm run dev
 ```
@@ -84,12 +91,12 @@ Deploy to Vercel for automated builds and hosting.
 
 ## Usage
 
-Documents is designed to support:
+Taizun is designed to support:
 
-- Product documentation
-- Technical manuals
-- Internal guides
-- Business knowledge bases
+- Machine learning projects
+- NLP applications
+- Computer vision tasks
+- Data processing workflows
 
 ---
 
@@ -138,4 +145,4 @@ For support or inquiries:
 
 t4zn — [@t4zn](https://x.com/t4zn)
 
-**Project:** [https://github.com/t4zn/rubix-documents](https://github.com/t4zn/rubix-documents)
+**Project:** [https://github.com/t4zn/taizun](https://github.com/t4zn/taizun)

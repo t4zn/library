@@ -1,0 +1,90 @@
+---
+title: Basic Usage Patterns
+description: Learn the fundamental patterns for using Taizun functions effectively.
+---
+
+## Importing Taizun
+
+The first step is to import the Taizun library:
+
+```python
+import taizun as tz
+```
+
+## Simple Function Calls
+
+Most Taizun functions are designed to be straightforward:
+
+```python
+# Text summarization
+text = "Your long text here..."
+summary = tz.summarize(text)
+print(summary)
+
+# Sentiment analysis
+sentiment = tz.moodscan("I love this library!")
+print(sentiment)
+
+# Named entity recognition
+entities = tz.labels("Barack Obama was the 44th President of the United States.")
+print(entities)
+```
+
+## Chaining Operations
+
+You can chain multiple operations together:
+
+```python
+# Clean text and then analyze sentiment
+raw_text = "   This is a SAMPLE text with STOPWORDS!!!   "
+clean_text = tz.scrub(raw_text)  # Remove stopwords and clean text
+sentiment = tz.moodscan(clean_text)  # Analyze sentiment
+print(f"Clean text: {clean_text}")
+print(f"Sentiment: {sentiment}")
+```
+
+## Working with Images
+
+Image processing functions work similarly:
+
+```python
+# Classify an image
+label = tz.classify_image("path/to/image.jpg")
+print(label)
+
+# Convert to grayscale
+tz.grayscale("input.jpg", "output_grayscale.jpg")
+
+# Resize an image
+tz.resize_image("input.jpg", "output_resized.jpg", size=(300, 300))
+```
+
+## Batch Processing
+
+For processing multiple items, you can use standard Python constructs:
+
+```python
+# Process multiple texts
+texts = ["Text 1", "Text 2", "Text 3"]
+summaries = [tz.summarize(text) for text in texts]
+
+# Process multiple images
+image_paths = ["img1.jpg", "img2.jpg", "img3.jpg"]
+labels = [tz.classify_image(path) for path in image_paths]
+```
+
+## Error Handling
+
+Taizun functions may raise exceptions for invalid inputs:
+
+```python
+try:
+    result = tz.summarize("")
+except ValueError as e:
+    print(f"Error: {e}")
+
+try:
+    label = tz.classify_image("nonexistent.jpg")
+except FileNotFoundError as e:
+    print(f"Error: {e}")
+```

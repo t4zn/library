@@ -1,80 +1,150 @@
 ---
 title: Setup
-description: Setting up and configuring your documentation project
+description: Setting up and configuring Taizun for your projects
 keywords:
-  ["setup", "configuration", "layout", "Google", "SEO", "nextjs", "documents"]
+  ["setup", "configuration", "python", "taizun", "nlp", "computer vision"]
 ---
 
-Setting up your new documentation project is straightforward. Most of the essential project settings can be configured within the `settings` folder.
+Setting up Taizun for your projects is straightforward. This guide covers the essential configuration options and best practices.
 
-## Settings
+## Basic Configuration
 
-This section provides the core settings for your documentation site, such as defining the site's URL, site icon and title.
+Taizun requires minimal configuration to get started. Most functions work out of the box with sensible defaults.
 
-```tsx showLineNumbers
-export const url = ""                 // The URL for your documentation site
-export const siteicon = ""            // Icon displayed next to the site name in the header
-export const sitename = ""            // Title of your documentation site
+```python
+import taizun as tz
+
+# Most functions work without any configuration
+result = tz.summarize_text("Your text here...")
 ```
 
-## Google Tags
+## Environment Variables
 
-This section allows you to integrate Google Tag Manager into your documentation project. You can add your GTM code and configure whether it's connected.
+For advanced usage, you can configure Taizun using environment variables:
 
-```tsx showLineNumbers
-export const gtm = ""                 // Add your Google Tag Manager code here
-export const gtmconnected = true      // Set to true if GTM is connected, otherwise set to false
+```bash
+export TAIZUN_MODEL_PATH=/path/to/models     # Path to custom models
+export TAIZUN_CACHE_DIR=/path/to/cache       # Cache directory for downloaded models
+export TAIZUN_LOG_LEVEL=INFO                 # Logging level (DEBUG, INFO, WARNING, ERROR)
 ```
 
-## Search Engine
+## Model Configuration
 
-Configure essential SEO settings to ensure your documentation site is optimized for search engines. This includes meta descriptions, keywords and social media sharing details like images and alt text.
+Some Taizun functions use pre-trained models. You can configure which models to use:
 
-```tsx showLineNumbers
-export const description = ""         // Description of your documentation site for SEO
-export const keywords = ["", ""]      // List of SEO keywords for your documentation site
-export const urlimage = ""            // The URL of the image used when sharing on social media)
-export const imagealt = ""            // Alt text for shared images, helpful for screen readers
-export const twitterhandle = ""       // Your company’s Twitter handle for social sharing
+```python
+import taizun as tz
+
+# Configure NLP models
+tz.config.nlp_model = "bert-base-uncased"    # For text processing
+tz.config.sentiment_model = "distilbert-base-uncased-finetuned-sst-2-english"
+
+# Configure Computer Vision models
+tz.config.cv_model = "resnet50"              # For image classification
 ```
 
-## Footer Branding
+## Performance Settings
 
-The footer settings allow you to customize the company information displayed at the bottom of the site. You can add the company name and the URL that the name will link to.
+Optimize Taizun for your specific use case:
 
-```tsx showLineNumbers
-export const companyname = ""         // The company name displayed in the copyright section
-export const companylink = ""         // The URL your company name should link to
+```python
+import taizun as tz
+
+# Enable/disable GPU acceleration
+tz.config.use_gpu = True                     # Default: auto-detect
+
+# Set batch sizes for processing multiple items
+tz.config.batch_size = 32                    # Default: 16
+
+# Configure caching
+tz.config.enable_caching = True              # Default: True
+tz.config.cache_size = 1000                  # Default: 100
 ```
 
-## General Layout
+## Logging Configuration
 
-The layout settings control the appearance and functionality of various elements of the documentation site, such as branding, the right sidebar, feedback options, table of contents, and scroll-to-top functionality.
+Control the verbosity of Taizun's logging:
 
-```tsx showLineNumbers
-export const branding = true          // Set to true to display our branding elements
-export const rightsidebar = true      // Set to true to enable the right sidebar with feedback, table of contents and scroll-to-top
-export const feedbackedit = true      // Control to enable/disable feedback on GitHub
-export const tableofcontent = true    // Control to enable/disable the generated table of contents
-export const totopscroll = true       // Control to enable/disable scroll-to-top button
+```python
+import taizun as tz
+import logging
+
+# Set logging level
+tz.set_log_level(logging.INFO)
+
+# Disable logging entirely
+tz.set_log_level(logging.CRITICAL)
+
+# Custom logger
+custom_logger = logging.getLogger("my_taizun")
+tz.set_logger(custom_logger)
 ```
 
-## Github Control
+## Resource Management
 
-If your MDX files are hosted on GitHub, you can configure the project to load documents directly from there. This option can be useful for syncing documentation updates directly with your repository.
+Manage system resources used by Taizun:
 
-```tsx showLineNumbers
-export const loadfromgithub = false   // Set to true to load your MDX documents directly from GitHub
+```python
+import taizun as tz
+
+# Limit memory usage
+tz.config.max_memory = "2GB"                 # Default: None (no limit)
+
+# Control number of CPU threads
+tz.config.num_threads = 4                    # Default: auto-detect
+
+# Clean up resources
+tz.cleanup()                                 # Free memory and close models
+```
+
+## Advanced Usage
+
+For complex applications, you can customize Taizun's behavior:
+
+```python
+import taizun as tz
+
+# Custom preprocessing functions
+def custom_preprocessor(text):
+    # Your preprocessing logic here
+    return text.lower().strip()
+
+tz.config.preprocessor = custom_preprocessor
+
+# Custom postprocessing functions
+def custom_postprocessor(result):
+    # Your postprocessing logic here
+    return result
+
+tz.config.postprocessor = custom_postprocessor
 ```
 
 ## Project Structure
 
+When using Taizun in larger projects, consider this structure:
+
+```
+my_project/
+├── main.py              # Your main application
+├── config.py            # Taizun configuration
+├── data/                # Data files
+├── models/              # Custom models (if any)
+└── utils/               # Helper functions
+```
+
 <CardGrid>
   <Card
-    title="Navigation"
-    href="/docs/navigation"
+    title="NLP Functions"
+    href="/docs/nlp"
     icon="alignJustify"
     variant="small"
-    description="Creating your navigation"
+    description="Explore NLP capabilities"
+  />
+  <Card
+    title="Computer Vision"
+    href="/docs/computer-vision"
+    icon="alignJustify"
+    variant="small"
+    description="Explore Computer Vision functions"
   />
 </CardGrid>

@@ -1,20 +1,23 @@
-export const url = "https://rubix-documents.vercel.app"
+export const url = "https://taizun.vercel.app"
 export const siteicon = "/icon.png"
 
 export const gtm = "GTM-XXXXXXX"
 export const gtmconnected = true
 
-export const sitename = "Documents"
+export const sitename = "Taizun"
 export const description =
-  "This comprehensive documentation template, crafted with Next.js and available as open-source, delivers a sleek and responsive design, tailored to meet all your project documentation requirements."
+  "Taizun is a Python library that simplifies machine learning tasks by providing utility functions for Natural Language Processing (NLP) and Computer Vision."
 export const keywords = [
-  "Next.js",
-  "documentation",
+  "Python",
+  "machine learning",
+  "NLP",
+  "Computer Vision",
+  "Taizun",
   "open source",
   "SEO",
 ]
 export const urlimage = "/images/og-image.png"
-export const imagealt = "Documentation Template"
+export const imagealt = "Taizun - Machine Learning Library"
 export const twitterhandle = "@t4zn"
 
 export const companyname = "t4zn"

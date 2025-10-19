@@ -1,0 +1,110 @@
+---
+title: Working with Text Data
+description: Master text processing techniques with Taizun's NLP functions.
+---
+
+## Text Preprocessing Pipeline
+
+Taizun provides a comprehensive set of tools for text preprocessing:
+
+```python
+import taizun as tz
+
+# Start with raw text
+raw_text = "   This is a SAMPLE text with STOPWORDS and punctuation!!!   "
+
+# Clean and normalize the text
+clean_text = tz.scrub(raw_text)  # Remove stopwords and clean text
+print(f"Cleaned: {clean_text}")
+
+# Analyze word frequency
+word_freq = tz.wordcount(clean_text)
+print(f"Word frequency: {word_freq}")
+
+# Extract named entities
+entities = tz.labels(clean_text)
+print(f"Named entities: {entities}")
+```
+
+## Text Analysis Workflow
+
+A typical text analysis workflow might look like this:
+
+```python
+import taizun as tz
+
+def analyze_document(text):
+    # Step 1: Get a summary
+    summary = tz.summarize(text)
+    print(f"Summary: {summary}")
+    
+    # Step 2: Analyze sentiment
+    sentiment = tz.moodscan(text)
+    print(f"Sentiment: {sentiment}")
+    
+    # Step 3: Extract key entities
+    entities = tz.labels(text)
+    print(f"Entities: {entities}")
+    
+    # Step 4: Analyze word usage
+    word_freq = tz.wordcount(text)
+    print(f"Most common words: {word_freq}")
+    
+    return {
+        'summary': summary,
+        'sentiment': sentiment,
+        'entities': entities,
+        'word_freq': word_freq
+    }
+
+# Example usage
+document = "Your long document text here..."
+results = analyze_document(document)
+```
+
+## Advanced Text Processing
+
+For more advanced text processing, you can combine multiple functions:
+
+```python
+import taizun as tz
+
+def preprocess_texts(texts):
+    """Preprocess a list of texts for analysis"""
+    processed = []
+    
+    for text in texts:
+        # Clean the text
+        clean = tz.scrub(text)
+        
+        # Get key information
+        summary = tz.summarize(clean)
+        sentiment = tz.moodscan(clean)
+        entities = tz.labels(clean)
+        
+        processed.append({
+            'original': text,
+            'cleaned': clean,
+            'summary': summary,
+            'sentiment': sentiment,
+            'entities': entities
+        })
+    
+    return processed
+
+# Example usage
+texts = [
+    "First document text...",
+    "Second document text...",
+    "Third document text..."
+]
+
+processed_texts = preprocess_texts(texts)
+```
+
+## Best Practices
+
+1. **Clean first**: Always clean your text data before analysis
+2. **Handle exceptions**: Text processing can fail with malformed input
+3. **Batch when possible**: Process multiple texts together for efficiency
+4. **Validate results**: Always check the output of NLP functions
