@@ -1,0 +1,61 @@
+---
+title: Remove Duplicates
+description: Remove duplicate elements from a list.
+---
+
+## Overview
+
+The remove duplicates function creates a new list containing only the unique elements from the original list, preserving the order of first occurrence. This operation is essential for data cleaning and set-like operations.
+
+## Usage
+
+```python
+from taizun import remove_duplicates
+duplicate_list = [1, 2, 2, 3, 3, 4]
+result = remove_duplicates(duplicate_list)
+print(result)
+```
+
+## Theory
+
+Duplicate removal transforms a sequence with repeated elements into a sequence where each distinct element appears exactly once. The operation can preserve order or sort the result.
+
+Key approaches:
+1. **Hash-based**: Use hash tables or sets for O(1) duplicate detection
+2. **Sorting**: Sort first, then remove adjacent duplicates
+3. **Nested loops**: Compare each element with all others (inefficient)
+4. **Built-in functions**: Language-specific deduplication utilities
+
+Algorithmic complexity:
+- **Hash-based**: O(n) time, O(n) space
+- **Sorting approach**: O(n log n) time, O(1) or O(n) space
+- **Nested loops**: O(n²) time, O(1) space
+
+Considerations:
+- **Order preservation**: Whether to maintain original sequence order
+- **Element equality**: Definition of when elements are considered duplicates
+- **Memory usage**: Trade-offs between time and space efficiency
+- **Mutability**: Modifying original list vs. creating new list
+
+Applications include:
+- **Data cleaning**: Removing redundant entries in datasets
+- **Set operations**: Implementing mathematical set functionality
+- **Result deduplication**: Eliminating repeated search or query results
+- **Performance optimization**: Reducing processing of identical items
+- **Statistical analysis**: Ensuring unique samples for calculations
+- **User interfaces**: Displaying distinct options or selections
+
+Implementation considerations:
+- **Hashability**: Requirements for elements to be used in hash-based approaches
+- **Equality semantics**: Handling of custom object comparison
+- **Performance characteristics**: Choosing appropriate algorithm for data size
+- **Memory constraints**: Managing space usage for large datasets
+
+In programming:
+```python
+# Python examples
+# Using set (doesn't preserve order)
+unique = list(set(original_list))
+# Preserving order with dict (Python 3.7+)
+unique = list(dict.fromkeys(original_list))
+```

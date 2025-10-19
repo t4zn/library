@@ -51,6 +51,9 @@ export function NavMenu({ isSheet = false }) {
   return (
     <>
       {Navigations.map((item) => {
+        // Type guard to check if item has external property
+        const hasExternal = 'external' in item && item.external === true;
+        
         const Comp = (
           <Anchor
             key={item.title + item.href}
@@ -58,11 +61,11 @@ export function NavMenu({ isSheet = false }) {
             activeClassName="font-bold text-primary"
             className="flex items-center gap-1 text-sm"
             href={item.href}
-            target={item.external ? "_blank" : undefined}
-            rel={item.external ? "noopener noreferrer" : undefined}
+            target={hasExternal ? "_blank" : undefined}
+            rel={hasExternal ? "noopener noreferrer" : undefined}
           >
             {item.title}{" "}
-            {item.external && (
+            {hasExternal && (
               <LuArrowUpRight className="h-3 w-3 align-super" strokeWidth={3} />
             )}
           </Anchor>

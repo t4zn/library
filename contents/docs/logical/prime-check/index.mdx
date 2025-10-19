@@ -1,0 +1,58 @@
+---
+title: Prime Check
+description: Check if a number is prime.
+---
+
+## Overview
+
+The prime check function determines whether a given integer is a prime number, meaning it has exactly two distinct positive divisors: 1 and itself. This fundamental operation is essential in number theory and cryptography.
+
+## Usage
+
+```python
+from taizun import is_prime
+prime_check_num = 7
+result = is_prime(prime_check_num)
+print(result)
+```
+
+## Theory
+
+A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. The first few prime numbers are 2, 3, 5, 7, 11, 13, 17, 19, 23, ...
+
+Key properties:
+1. **Uniqueness**: 2 is the only even prime number
+2. **Infinity**: There are infinitely many prime numbers
+3. **Fundamental theorem**: Every integer > 1 can be expressed as a unique product of primes
+
+Algorithmic approaches:
+1. **Trial division**: Test divisibility by all numbers up to √n
+2. **Optimized trial division**: Test only 2 and odd numbers up to √n
+3. **Sieve methods**: Precompute primes using Eratosthenes sieve
+4. **Probabilistic tests**: Miller-Rabin for very large numbers
+
+Applications include:
+- **Cryptography**: RSA encryption relies on large prime numbers
+- **Hash tables**: Prime-sized tables improve distribution
+- **Random number generation**: Some algorithms use primes
+- **Algorithm design**: Prime factorization and number theory problems
+- **Mathematical research**: Studying prime distribution and patterns
+- **Computer science**: Hashing functions and data structure sizing
+
+Implementation considerations:
+- **Edge cases**: Handling numbers < 2, and the special case of 2
+- **Performance**: Optimizing for large numbers with efficient algorithms
+- **Precision**: Handling integer overflow for large values
+- **Probabilistic vs. deterministic**: Trade-offs between speed and certainty
+
+In programming:
+```python
+# Basic approach
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+```

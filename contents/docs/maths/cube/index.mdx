@@ -1,0 +1,47 @@
+---
+title: Cube
+description: Calculate the cube of a number.
+---
+
+## Overview
+
+The cube function calculates the result of multiplying a number by itself three times. This mathematical operation is fundamental in geometry, physics, and various computational algorithms.
+
+## Usage
+
+```python
+from taizun import cube
+cube_num = 2
+result = cube(cube_num)
+print(result)
+```
+
+## Theory
+
+Cubing a number n means computing n³ = n × n × n. This operation has several mathematical properties:
+
+1. **Sign preservation**: The cube of a positive number is positive, and the cube of a negative number is negative
+2. **Monotonicity**: If a > b, then a³ > b³ (unlike squaring, this holds for all real numbers)
+3. **Inverse relationship**: The cube root function (∛x) is the inverse of the cube function
+
+Geometric interpretation:
+- The cube of a number represents the volume of a cube with sides of that length
+- In three-dimensional space, cubic relationships describe volume scaling
+
+Applications include:
+- **Geometry**: Volume calculations for cubes and other 3D shapes
+- **Physics**: Density calculations, moment of inertia, and other cubic relationships
+- **Computer graphics**: 3D scaling transformations and volume calculations
+- **Engineering**: Stress-strain relationships in materials (Hooke's law extensions)
+- **Economics**: Production functions with cubic cost relationships
+
+In programming, cubing can be implemented as:
+```python
+cube = number * number * number
+# or
+cube = number ** 3
+# or
+cube = pow(number, 3)
+```
+
+For performance-critical applications, direct multiplication is typically faster than exponentiation functions.

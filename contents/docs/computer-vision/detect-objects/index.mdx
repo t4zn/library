@@ -1,0 +1,38 @@
+---
+title: Detect Objects
+description: Detect objects in an image with bounding boxes and labels.
+---
+
+## Overview
+
+Object detection is a computer vision technique that identifies and locates objects within images or videos. Unlike image classification, which assigns a single label to an entire image, object detection finds multiple objects and specifies their positions using bounding boxes.
+
+## Usage
+
+```python
+from taizun import detect_objects
+objects = detect_objects("path/to/image.jpg")
+print(objects)
+```
+
+## Theory
+
+Object detection combines image classification with object localization. The main challenges include:
+
+1. **Localization**: Determining the precise position of objects using bounding boxes (defined by coordinates).
+
+2. **Classification**: Identifying what each detected object is from a set of predefined categories.
+
+3. **Scale Variation**: Handling objects of different sizes within the same image.
+
+4. ** Occlusion**: Dealing with partially visible objects.
+
+The main approaches to object detection are:
+
+1. **Two-Stage Detectors**: First generate region proposals, then classify and refine them. R-CNN, Fast R-CNN, and Faster R-CNN are prominent examples.
+
+2. **Single-Stage Detectors**: Directly predict object classes and bounding boxes in one pass. YOLO (You Only Look Once) and SSD (Single Shot MultiBox Detector) are popular approaches.
+
+3. **Transformer-Based Detectors**: Recent approaches like DETR (DEtection TRansformer) use transformer architectures for end-to-end object detection.
+
+Modern object detection systems achieve real-time performance with high accuracy, making them suitable for applications like autonomous driving, surveillance, and robotics.

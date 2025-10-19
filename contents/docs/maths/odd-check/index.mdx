@@ -1,0 +1,52 @@
+---
+title: Odd Check
+description: Check if a number is odd.
+---
+
+## Overview
+
+The odd check function determines whether a given integer is not divisible by 2, meaning it has a remainder of 1 when divided by 2. Odd numbers complement even numbers in mathematical analysis.
+
+## Usage
+
+```python
+from taizun import is_odd
+odd_check_num = 5
+result = is_odd(odd_check_num)
+print(result)
+```
+
+## Theory
+
+An odd number is any integer that can be expressed in the form 2k+1, where k is an integer. When an odd number is divided by 2, the remainder is always 1.
+
+Key properties of odd numbers:
+1. **Divisibility**: Odd numbers are not divisible by 2
+2. **Arithmetic**:
+   - Odd ± Even = Odd
+   - Odd ± Odd = Even
+   - Odd × Odd = Odd
+   - Odd × Even = Even
+3. **Binary Representation**: Odd numbers always end in 1 in binary
+
+In programming, checking if a number is odd is typically done using the modulo operator (%):
+```python
+is_odd = (number % 2) == 1
+```
+
+Alternatively, it can be determined by checking if it's not even:
+```python
+is_odd = not is_even(number)
+```
+
+Bitwise operations provide an efficient method:
+```python
+is_odd = (number & 1) == 1
+```
+
+Odd numbers are significant in:
+- Mathematical proofs (especially in induction)
+- Number theory (prime numbers greater than 2 are odd)
+- Computer graphics (checkerboard patterns alternate based on odd/even coordinates)
+- Signal processing (odd functions have specific symmetry properties)
+- Game theory (some strategies depend on odd/even turn counts)

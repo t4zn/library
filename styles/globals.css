@@ -130,6 +130,13 @@
   @apply dark:prose-invert prose-code:text-neutral-800 dark:prose-code:bg-neutral-900 dark:prose-code:text-white dark:prose-pre:bg-neutral-900;
 }
 
+/* Ensure headers are visible in dark mode */
+.dark .typography h2,
+.dark .typography h3,
+.dark .typography h4 {
+  @apply text-white;
+}
+
 .prose {
   margin: 0 !important;
 }

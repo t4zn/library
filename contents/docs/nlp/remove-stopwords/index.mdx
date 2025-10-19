@@ -1,0 +1,28 @@
+---
+title: Remove Stopwords
+description: Remove common stopwords from text.
+---
+
+## Overview
+
+Stopwords are common words (e.g., "the", "is", "at", "which", "on") that often provide little meaningful information in text analysis tasks. Removing them can reduce noise and improve processing efficiency.
+
+## Usage
+
+```python
+from taizun import remove_stopwords
+cleaned_text = remove_stopwords("This is a sample text with stopwords.")
+print(cleaned_text)
+```
+
+## Theory
+
+Stopword removal is a text preprocessing technique used in natural language processing and information retrieval. The process involves:
+
+1. **Stopword Identification**: Comparing words against a predefined list of stopwords. These lists vary by language and application domain.
+
+2. **Filtering**: Removing identified stopwords from the text while preserving the structure and meaning of the remaining content.
+
+3. **Language Considerations**: Different languages have different sets of stopwords. For example, English stopwords include "the", "and", "or", while other languages have their own common function words.
+
+The effectiveness of stopword removal depends on the specific application. While it's beneficial for tasks like keyword extraction and topic modeling, it may be detrimental for sentiment analysis where words like "not" can change the meaning of a sentence.

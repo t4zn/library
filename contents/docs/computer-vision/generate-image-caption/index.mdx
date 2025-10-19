@@ -1,0 +1,28 @@
+---
+title: Generate Image Caption
+description: Generate a natural language caption for an image.
+---
+
+## Overview
+
+Image captioning is the process of automatically generating a descriptive textual caption for an image. This computer vision task combines image understanding with natural language generation.
+
+## Usage
+
+```python
+from taizun import generate_image_caption
+caption = generate_image_caption("path/to/image.jpg")
+print(caption)
+```
+
+## Theory
+
+Image captioning involves two main components:
+
+1. **Visual Feature Extraction**: Using convolutional neural networks (CNNs) to extract meaningful features from the image. Popular architectures include ResNet, VGG, and more recently, Vision Transformers.
+
+2. **Language Generation**: Using recurrent neural networks (RNNs) or transformer models to generate descriptive text based on the extracted visual features. The encoder-decoder architecture is commonly used, where the CNN acts as the encoder and the RNN/Transformer as the decoder.
+
+Modern approaches often use attention mechanisms that allow the model to focus on different parts of the image when generating each word of the caption. This leads to more accurate and detailed descriptions.
+
+The training process requires large datasets of images paired with human-written captions, such as the MS COCO dataset. Models are typically trained using cross-entropy loss or more advanced techniques like reinforcement learning.

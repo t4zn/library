@@ -1,0 +1,40 @@
+---
+title: Convert to Grayscale
+description: Convert an image to grayscale.
+---
+
+## Overview
+
+Grayscale conversion transforms a color image into a monochrome version by removing hue and saturation information while preserving luminance. This operation reduces data complexity and is often used as a preprocessing step in computer vision tasks.
+
+## Usage
+
+```python
+from taizun import convert_to_grayscale
+grayscale = convert_to_grayscale("path/to/image.jpg", "path/to/output_grayscale.jpg")
+print(grayscale)
+```
+
+## Theory
+
+Grayscale conversion involves transforming RGB color values to a single intensity value per pixel. The most common approach uses a weighted sum that accounts for human perception:
+
+**Luminance Formula**: Y = 0.299R + 0.587G + 0.114B
+
+This formula reflects the human eye's sensitivity to different colors:
+- Green contributes most to perceived brightness (58.7%)
+- Red contributes moderately (29.9%)
+- Blue contributes least (11.4%)
+
+Alternative methods include:
+1. **Average Method**: Simple average of R, G, B values
+2. **Lightness Method**: Average of maximum and minimum color values
+3. **Desaturation**: Remove saturation while preserving luminance in HSV/HSI color space
+
+Grayscale conversion is beneficial for:
+- Reducing computational complexity
+- Simplifying image analysis algorithms
+- Standardizing input for certain computer vision models
+- Creating artistic effects
+
+Many computer vision algorithms work on grayscale images because color information is often not necessary for detecting shapes, edges, or textures.

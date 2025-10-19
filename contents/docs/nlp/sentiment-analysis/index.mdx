@@ -1,0 +1,30 @@
+---
+title: Sentiment Analysis
+description: Analyze the sentiment of text (positive, negative, neutral).
+---
+
+## Overview
+
+Sentiment analysis is the process of computationally identifying and categorizing opinions expressed in a piece of text, especially to determine whether the writer's attitude towards a particular topic, product, etc. is positive, negative, or neutral.
+
+## Usage
+
+```python
+from taizun import sentiment_analysis
+sentiment = sentiment_analysis("I love this library!")
+print(sentiment)
+```
+
+## Theory
+
+Sentiment analysis involves classifying text into sentiment categories, typically positive, negative, or neutral. More advanced systems can detect specific emotions like joy, anger, fear, or surprise.
+
+The main approaches include:
+
+1. **Lexicon-based methods**: Use predefined dictionaries of words with associated sentiment scores. Each word in the text is looked up, and the overall sentiment is calculated from these scores.
+
+2. **Machine learning methods**: Train classifiers on labeled datasets of text with known sentiments. Features like bag-of-words or TF-IDF vectors are extracted and used with algorithms like Naive Bayes or SVM.
+
+3. **Deep learning methods**: Employ neural networks like RNNs or transformer models (BERT) that can capture contextual information and complex linguistic patterns.
+
+The choice of approach depends on the application requirements, available training data, and desired accuracy. Deep learning methods generally provide the best performance but require more computational resources.

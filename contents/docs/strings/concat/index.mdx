@@ -1,0 +1,55 @@
+---
+title: Concat
+description: Concatenate two strings.
+---
+
+## Overview
+
+The concat function joins two strings together to form a single combined string. This fundamental operation is essential for building dynamic text content and manipulating string data.
+
+## Usage
+
+```python
+from taizun import concat
+first_string, second_string = "Hello", " World"
+result = concat(first_string, second_string)
+print(result)
+```
+
+## Theory
+
+String concatenation is the operation of joining character sequences end-to-end. It forms the basis for constructing complex text from simpler components.
+
+Key properties:
+1. **Associativity**: (a + b) + c = a + (b + c)
+2. **Identity element**: Concatenating with an empty string leaves the original unchanged
+3. **Non-commutativity**: Order matters (a + b ≠ b + a in general)
+4. **Length additivity**: Length of result equals sum of input lengths
+
+Implementation approaches:
+1. **Built-in operators**: Using + or . operators in most programming languages
+2. **Function calls**: Dedicated concat functions for explicit intent
+3. **Builder patterns**: StringBuilder or similar classes for multiple concatenations
+4. **Join operations**: Combining multiple strings with separators
+
+Performance considerations:
+- **Immutable strings**: Creating new objects in languages with immutable strings
+- **Memory allocation**: Efficiently managing memory for growing strings
+- **Algorithmic complexity**: O(n) time for simple concatenation, but O(n²) for repeated operations
+- **Optimization techniques**: Using specialized classes for multiple concatenations
+
+Applications include:
+- **Dynamic content generation**: Building messages, reports, and user interfaces
+- **File path construction**: Combining directory and file names
+- **URL building**: Constructing web addresses from components
+- **Database queries**: Building dynamic SQL statements
+- **Template processing**: Substituting values into text templates
+- **Data serialization**: Creating formatted output for storage or transmission
+
+In programming:
+```python
+# Simple concatenation
+result = first + second
+# Multiple strings
+result = "".join([str1, str2, str3])
+```

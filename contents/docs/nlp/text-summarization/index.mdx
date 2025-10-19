@@ -1,0 +1,26 @@
+---
+title: Text Summarization
+description: Summarize long texts into concise, readable summaries.
+---
+
+## Overview
+
+Text summarization is the process of creating a shorter version of a text document while preserving its key information and meaning. This technique is valuable for processing large volumes of text efficiently.
+
+## Usage
+
+```python
+from taizun import summarize_text
+summary = summarize_text("Your long text here...")
+print(summary)
+```
+
+## Theory
+
+Text summarization techniques fall into two main categories:
+
+1. **Extractive Summarization**: Selects and combines the most important sentences or phrases from the original text. It works by identifying significant sentences based on factors like sentence position, keyword frequency, and similarity to the main theme.
+
+2. **Abstractive Summarization**: Generates new sentences that capture the essence of the original text, often using natural language generation techniques. This approach can paraphrase and restructure content to create more concise summaries.
+
+The choice between extractive and abstractive methods depends on the desired balance between accuracy and fluency. Extractive methods are generally more reliable but may produce less readable summaries, while abstractive methods can generate more natural language but may introduce inaccuracies.

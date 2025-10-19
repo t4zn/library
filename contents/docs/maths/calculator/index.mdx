@@ -1,0 +1,42 @@
+---
+title: Calculator
+description: Perform basic arithmetic operations.
+---
+
+## Overview
+
+The calculator function performs basic arithmetic operations including addition, subtraction, multiplication, and division. It provides a simple interface for mathematical computations.
+
+## Usage
+
+```python
+from taizun import calculator
+num1, num2 = 10, 5
+operation_type = 'add'
+result = calculator(num1, num2, operation_type)
+print(result)
+```
+
+## Theory
+
+Basic arithmetic operations form the foundation of mathematical computation:
+
+1. **Addition (+)**: Combines two numbers to produce a sum. Commutative and associative operation.
+
+2. **Subtraction (-)**: Finds the difference between two numbers. Neither commutative nor associative.
+
+3. **Multiplication (×)**: Repeated addition of one number by another. Commutative and associative operation.
+
+4. **Division (÷)**: Determines how many times one number is contained within another. Neither commutative nor associative.
+
+In computer implementations, special considerations include:
+- Handling division by zero errors
+- Managing floating-point precision
+- Dealing with integer overflow
+- Supporting different number types (integers, floats, complex numbers)
+
+Modern calculators often implement additional features like:
+- Order of operations (PEMDAS/BODMAS)
+- Parenthetical expressions
+- Scientific functions (exponents, roots, logarithms)
+- Memory functions for storing intermediate results

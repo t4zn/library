@@ -1,0 +1,72 @@
+---
+title: Text Processing
+description: Learn about text processing techniques and their applications.
+---
+
+Text processing is a fundamental aspect of Natural Language Processing (NLP) that involves cleaning, normalizing, and preparing text data for analysis.
+
+## Overview
+
+Text processing involves converting raw text into a format that can be understood and analyzed by computers. This includes tasks like tokenization, stemming, lemmatization, and removing stop words.
+
+## Key Techniques
+
+- Tokenization
+- Stemming and Lemmatization
+- Stop Word Removal
+- Text Normalization
+- Part-of-Speech Tagging
+
+These techniques form the foundation for more advanced NLP tasks like sentiment analysis and named entity recognition.
+
+## Detailed Theory
+
+### Tokenization
+
+Tokenization is the process of breaking down text into smaller units called tokens, which can be words, phrases, or sentences. Proper tokenization is crucial as it directly affects the performance of downstream NLP tasks.
+
+Example usage:
+```python
+from taizun import tokenize_text
+tokens = tokenize_text("Hello world, how are you?")
+print(tokens)
+# Output: ['Hello', 'world', ',', 'how', 'are', 'you', '?']
+```
+
+### Stemming and Lemmatization
+
+Stemming reduces words to their root form by removing suffixes (e.g., "running" → "run"). Lemmatization is more sophisticated, reducing words to their base or dictionary form (lemma) using vocabulary and morphological analysis.
+
+Example usage:
+```python
+from taizun import stem_text, lemmatize_text
+text = "The children are playing happily"
+stemmed = stem_text(text)
+lemmatized = lemmatize_text(text)
+print(stemmed)
+print(lemmatized)
+```
+
+### Stop Word Removal
+
+Stop words are common words (e.g., "the", "is", "at") that often provide little meaningful information. Removing them can reduce noise and improve processing efficiency.
+
+Example usage:
+```python
+from taizun import remove_stopwords
+cleaned_text = remove_stopwords("This is a sample text with stopwords.")
+print(cleaned_text)
+# Output: "sample text stopwords."
+```
+
+### Text Normalization
+
+Text normalization involves converting text into a standard format, including lowercasing, removing punctuation, and handling special characters. This ensures consistency in text processing.
+
+Example usage:
+```python
+from taizun import normalize_text
+normalized = normalize_text("Hello WORLD!!! How are YOU?")
+print(normalized)
+# Output: "hello world how are you"
+```

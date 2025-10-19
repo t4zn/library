@@ -1,0 +1,55 @@
+---
+title: Greet
+description: Generate a greeting message.
+---
+
+## Overview
+
+The greet function creates a personalized greeting message by combining a standard greeting with a provided name. This simple string formatting operation is commonly used in user interfaces and communication systems.
+
+## Usage
+
+```python
+from taizun import greet
+user_name = "Taizun"
+result = greet(user_name)
+print(result)
+```
+
+## Theory
+
+String formatting and concatenation are fundamental operations in programming that combine static text with dynamic values. The greet function demonstrates basic string interpolation techniques.
+
+Key concepts:
+1. **Template strings**: Predefined text with placeholders for dynamic content
+2. **String interpolation**: Substituting variables into string templates
+3. **Concatenation**: Joining multiple strings together
+4. **Formatting options**: Controlling the appearance of inserted values
+
+Implementation approaches:
+1. **String concatenation**: Using + operator to join strings
+2. **Format strings**: Using placeholders like %s or {} with formatting functions
+3. **Template literals**: Language-specific syntax for embedded expressions
+4. **Builder patterns**: Using specialized classes for complex string construction
+
+Applications include:
+- **User interfaces**: Personalized messages and notifications
+- **Logging systems**: Formatted log messages with contextual information
+- **Report generation**: Dynamic content creation with variable data
+- **Internationalization**: Language-specific templates with localized content
+- **API responses**: Formatted output for web services
+- **Documentation**: Automated generation of examples and tutorials
+
+Considerations:
+- **Security**: Preventing injection attacks with user-provided content
+- **Localization**: Supporting different languages and cultural conventions
+- **Performance**: Efficient string building for high-frequency operations
+- **Validation**: Ensuring input values are appropriate for the context
+
+In programming:
+```python
+# String formatting approaches
+greeting = "Hello, " + name + "!"
+greeting = "Hello, {}!".format(name)
+greeting = f"Hello, {name}!"  # Python f-strings
+```

@@ -1,0 +1,66 @@
+---
+title: Merge Lists
+description: Combine two lists into one.
+---
+
+## Overview
+
+The merge lists function combines two separate lists into a single list containing all elements from both inputs. This fundamental operation is essential for data aggregation and list manipulation.
+
+## Usage
+
+```python
+from taizun import merge_lists
+list_one = [1, 2, 3]
+list_two = [4, 5, 6]
+result = merge_lists(list_one, list_two)
+print(result)
+```
+
+## Theory
+
+List merging is a basic operation that creates a new sequence containing elements from multiple source sequences. The operation preserves the order of elements within each list while determining the relationship between lists.
+
+Types of merging:
+1. **Concatenation**: Simple appending of one list to another
+2. **Interleaving**: Alternating elements from each list
+3. **Sorted merging**: Combining sorted lists while maintaining order
+4. **Union merging**: Combining lists while removing duplicates
+
+Algorithmic approaches:
+- **Direct concatenation**: O(n+m) time, creates new list
+- **In-place extension**: Modifies first list, O(m) time
+- **Iterator-based**: Lazy evaluation for memory efficiency
+- **Recursive merging**: Functional programming approach
+
+Considerations:
+- **Order preservation**: Maintaining sequence within each original list
+- **Memory efficiency**: Creating new lists vs. modifying existing ones
+- **Element types**: Handling heterogeneous data types
+- **Performance**: Time complexity for large lists
+- **Immutability**: Whether to modify inputs or create new structures
+
+Applications include:
+- **Data aggregation**: Combining results from multiple sources
+- **Batch processing**: Merging processing queues or workloads
+- **Algorithm implementation**: Merge sort and other divide-and-conquer algorithms
+- **User interface**: Combining selection lists or option groups
+- **Database operations**: Union queries and result set combination
+- **Configuration management**: Merging settings from multiple sources
+
+Implementation considerations:
+- **Edge cases**: Handling empty lists and null inputs
+- **Type compatibility**: Ensuring elements can be combined
+- **Memory management**: Efficient allocation and copying strategies
+- **Performance optimization**: Minimizing unnecessary operations
+
+In programming:
+```python
+# Python examples
+# Simple concatenation
+merged = list_one + list_two
+# In-place extension
+list_one.extend(list_two)
+# Using unpacking (Python 3.5+)
+merged = [*list_one, *list_two]
+```

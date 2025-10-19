@@ -1,0 +1,63 @@
+---
+title: Convert to Float
+description: Convert a string to a floating-point number.
+---
+
+## Overview
+
+The convert to float function parses a string representation of a decimal number and returns its floating-point value. This operation enables processing of fractional and scientific notation numbers from text input.
+
+## Usage
+
+```python
+from taizun import convert_to_float
+float_string = "123.45"
+result = convert_to_float(float_string)
+print(result)
+```
+
+## Theory
+
+Floating-point conversion involves interpreting character sequences as real numbers in scientific notation: mantissa × base^exponent. Most implementations use IEEE 754 double-precision format.
+
+Key components:
+1. **Sign detection**: Processing + or - prefixes
+2. **Integer part**: Converting digits before decimal point
+3. **Fractional part**: Converting digits after decimal point
+4. **Exponent handling**: Processing scientific notation (e.g., 1.23e-4)
+5. **Special values**: Recognizing infinity and NaN representations
+
+Algorithmic approaches:
+1. **State machine parsing**: Tracking different parts of number format
+2. **Built-in functions**: Language-specific conversion functions
+3. **Manual accumulation**: Calculating value through arithmetic operations
+4. **Regular expressions**: Validating format before conversion
+
+Error conditions:
+- **Invalid format**: Non-numeric characters or malformed notation
+- **Overflow**: Numbers exceeding representable range
+- **Underflow**: Numbers too small for normalized representation
+- **Precision loss**: Inexact representation of decimal values
+- **Special cases**: Handling infinity, NaN, and signed zero
+
+Applications include:
+- **Scientific computing**: Processing experimental data and measurements
+- **Financial calculations**: Handling monetary values and percentages
+- **Configuration files**: Reading decimal parameters and settings
+- **Data analysis**: Processing statistical data and metrics
+- **Graphics programming**: Handling coordinates and transformation values
+- **User interfaces**: Converting input fields to numerical values
+
+Implementation considerations:
+- **IEEE 754 compliance**: Adhering to floating-point standards
+- **Locale sensitivity**: Handling different decimal separators
+- **Performance optimization**: Efficient parsing for high-frequency operations
+- **Error reporting**: Providing meaningful feedback on conversion failures
+
+In programming:
+```python
+# Built-in conversion
+number = float(string)
+# Scientific notation example
+number = float("1.23e-4")  # Results in 0.000123
+```

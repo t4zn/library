@@ -1,0 +1,36 @@
+---
+title: Resize Image
+description: Resize an image to specified dimensions.
+---
+
+## Overview
+
+Image resizing is a fundamental image processing operation that changes the dimensions of an image while attempting to preserve its visual quality. This operation is essential for preparing images for different display requirements or model inputs.
+
+## Usage
+
+```python
+from taizun import resize_image
+resized = resize_image("path/to/image.jpg", "path/to/output.jpg", size=(300, 300))
+print(resized)
+```
+
+## Theory
+
+Image resizing involves changing the number of pixels in an image through interpolation techniques. The main considerations are:
+
+1. **Scaling Factors**: 
+   - Upscaling (increasing dimensions) requires creating new pixel values
+   - Downscaling (decreasing dimensions) requires removing information
+
+2. **Interpolation Methods**:
+   - **Nearest Neighbor**: Fast but can produce blocky results
+   - **Bilinear**: Balances speed and quality by averaging neighboring pixels
+   - **Bicubic**: Higher quality method that considers more neighboring pixels
+   - **Lanczos**: High-quality method using sinc function for sharp results
+
+3. **Aspect Ratio**: Maintaining the original aspect ratio prevents image distortion. When resizing to specific dimensions, either cropping or padding may be necessary to preserve proportions.
+
+4. **Quality Considerations**: Repeated resizing operations can degrade image quality, so it's best to resize directly from the original when possible.
+
+Proper image resizing is crucial for computer vision pipelines where models expect specific input dimensions.

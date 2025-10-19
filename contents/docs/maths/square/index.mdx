@@ -1,0 +1,47 @@
+---
+title: Square
+description: Calculate the square of a number.
+---
+
+## Overview
+
+The square function calculates the result of multiplying a number by itself. This fundamental mathematical operation appears in numerous formulas and algorithms across various fields.
+
+## Usage
+
+```python
+from taizun import square
+square_num = 3
+result = square(square_num)
+print(result)
+```
+
+## Theory
+
+Squaring a number n means computing n² = n × n. This operation has several important mathematical properties:
+
+1. **Non-negativity**: The square of any real number is non-negative (n² ≥ 0)
+2. **Symmetry**: (-n)² = n², meaning squares of opposite numbers are equal
+3. **Monotonicity**: For non-negative numbers, if a > b, then a² > b²
+
+Geometric interpretation:
+- The square of a number represents the area of a square with sides of that length
+- In the Cartesian plane, y = x² forms a parabola opening upward
+
+Applications include:
+- **Distance calculations**: Euclidean distance formula uses squares
+- **Statistics**: Variance and standard deviation calculations
+- **Physics**: Kinetic energy (KE = ½mv²) and other quadratic relationships
+- **Computer graphics**: Lighting calculations and distance-based effects
+- **Optimization**: Many objective functions are quadratic
+
+In programming, squaring can be implemented as:
+```python
+square = number * number
+# or
+square = number ** 2
+# or
+square = pow(number, 2)
+```
+
+For large numbers, direct multiplication is typically more efficient than using exponentiation functions.

@@ -1,0 +1,55 @@
+---
+title: Average
+description: Calculate the average of a list of numbers.
+---
+
+## Overview
+
+The average function calculates the arithmetic mean of a collection of numbers by summing all values and dividing by the count. This fundamental statistical measure represents the central tendency of data.
+
+## Usage
+
+```python
+from taizun import avg
+number_list = [1, 2, 3, 4, 5]
+result = avg(number_list)
+print(result)
+```
+
+## Theory
+
+The arithmetic mean (average) of a set of n numbers is defined as:
+Average = (sum of all numbers) / (count of numbers)
+
+Key properties:
+1. **Linearity**: avg(a·X + b) = a·avg(X) + b for constants a, b
+2. **Range**: The average lies between the minimum and maximum values
+3. **Sensitivity**: All data points contribute equally to the average
+4. **Units**: The average has the same units as the original data
+
+Types of averages:
+- **Arithmetic mean**: Standard average (sum/count)
+- **Geometric mean**: nth root of product of n numbers
+- **Harmonic mean**: Reciprocal of average of reciprocals
+- **Weighted mean**: Accounts for different importance of values
+
+Applications include:
+- **Statistics**: Central tendency measure in data analysis
+- **Signal processing**: DC component extraction from signals
+- **Finance**: Average returns, prices, and performance metrics
+- **Quality control**: Process mean monitoring
+- **Machine learning**: Feature normalization and batch processing
+- **Physics**: Center of mass calculations
+
+Considerations:
+- **Outliers**: Extreme values can significantly skew the average
+- **Missing data**: Handling NaN or undefined values
+- **Precision**: Floating-point arithmetic considerations
+- **Empty sets**: Defining behavior for zero-length collections
+
+In programming:
+```python
+# Standard implementation
+def average(numbers):
+    return sum(numbers) / len(numbers) if numbers else 0
+```

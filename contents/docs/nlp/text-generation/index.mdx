@@ -1,0 +1,30 @@
+---
+title: Text Generation
+description: Generate text from a prompt using GPT-2.
+---
+
+## Overview
+
+Text generation is the process of automatically creating new text content based on a given prompt or context. This technique uses language models to produce human-like text that continues from or relates to the input prompt.
+
+## Usage
+
+```python
+from taizun import text_generation
+generated_text = text_generation("Once upon a time,")
+print(generated_text)
+```
+
+## Theory
+
+Text generation relies on language models that have been trained on vast amounts of text data to learn patterns of human language. These models predict the next word in a sequence based on the context provided by previous words.
+
+Modern approaches include:
+
+1. **Recurrent Neural Networks (RNNs)**: Process sequences one token at a time, maintaining hidden state information.
+
+2. **Transformer Models**: Use self-attention mechanisms to process all tokens simultaneously while capturing long-range dependencies.
+
+3. **Prompt Engineering**: Techniques for guiding the generation process through carefully crafted input prompts.
+
+The quality of generated text depends on the model's training data, size, and architecture. Generated text can be controlled through parameters like temperature, which affects randomness, and top-k or nucleus sampling, which influence diversity.

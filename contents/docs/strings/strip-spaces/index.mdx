@@ -1,0 +1,58 @@
+---
+title: Strip Spaces
+description: Remove leading and trailing whitespace from a string.
+---
+
+## Overview
+
+The strip spaces function removes whitespace characters from the beginning and end of a string while preserving internal spacing. This operation is essential for cleaning user input and standardizing text data.
+
+## Usage
+
+```python
+from taizun import strip_spaces
+space_string = "   hello   "
+result = strip_spaces(space_string)
+print(result)
+```
+
+## Theory
+
+Whitespace stripping is a text processing operation that removes invisible characters from the boundaries of a string. Whitespace includes spaces, tabs, newlines, and other Unicode separator characters.
+
+Types of stripping:
+1. **Leading strip**: Remove whitespace from the beginning only
+2. **Trailing strip**: Remove whitespace from the end only
+3. **Both strip**: Remove whitespace from both ends (standard behavior)
+
+Character classes considered whitespace:
+- Space (U+0020)
+- Tab (U+0009)
+- Line feed (U+000A)
+- Carriage return (U+000D)
+- Form feed (U+000C)
+- Various Unicode whitespace characters
+
+Applications include:
+- **User input validation**: Cleaning form data and command-line arguments
+- **Data processing**: Standardizing text from external sources
+- **File parsing**: Removing extraneous whitespace from structured data
+- **Configuration files**: Processing settings and parameters
+- **Search operations**: Improving matching accuracy by removing padding
+- **Database storage**: Ensuring consistent data formatting
+
+Implementation considerations:
+- **Unicode compliance**: Proper handling of all whitespace characters
+- **Performance**: Efficient algorithms for large strings
+- **Memory management**: In-place vs. new string creation
+- **Custom character sets**: Allowing specification of characters to strip
+
+In programming:
+```python
+# Built-in methods
+stripped = text.strip()      # Remove from both ends
+leading = text.lstrip()      # Remove from left only
+trailing = text.rstrip()     # Remove from right only
+# Custom characters
+stripped = text.strip(" \t\n")  # Specify characters to remove
+```

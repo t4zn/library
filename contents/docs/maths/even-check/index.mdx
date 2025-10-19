@@ -1,0 +1,45 @@
+---
+title: Even Check
+description: Check if a number is even.
+---
+
+## Overview
+
+The even check function determines whether a given integer is divisible by 2 without a remainder. Even numbers are fundamental in mathematics and have specific properties that make them useful in various algorithms.
+
+## Usage
+
+```python
+from taizun import is_even
+even_check_num = 4
+result = is_even(even_check_num)
+print(result)
+```
+
+## Theory
+
+An even number is any integer that can be expressed in the form 2k, where k is an integer. This means when an even number is divided by 2, the remainder is zero.
+
+Key properties of even numbers:
+1. **Divisibility**: Even numbers are divisible by 2
+2. **Arithmetic**: 
+   - Even ± Even = Even
+   - Odd ± Odd = Even
+   - Even × Any Integer = Even
+3. **Binary Representation**: Even numbers always end in 0 in binary
+
+In computer science, checking if a number is even is typically done using the modulo operator (%):
+```python
+is_even = (number % 2) == 0
+```
+
+This is more efficient than division and checking for a remainder. Bitwise operations can also be used:
+```python
+is_even = (number & 1) == 0
+```
+
+Even numbers play important roles in:
+- Computer memory addressing (even addresses for word alignment)
+- Algorithm design (divide-and-conquer often splits into even halves)
+- Mathematical proofs (induction often considers even and odd cases separately)
+- Cryptography (many algorithms have different behavior for even and odd inputs)

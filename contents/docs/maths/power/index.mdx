@@ -1,0 +1,58 @@
+---
+title: Power
+description: Calculate the power of a number.
+---
+
+## Overview
+
+The power function calculates the result of raising a base number to an exponent. This fundamental mathematical operation generalizes multiplication and appears in numerous scientific and engineering applications.
+
+## Usage
+
+```python
+from taizun import power
+base_num, exponent_num = 2, 3
+result = power(base_num, exponent_num)
+print(result)
+```
+
+## Theory
+
+Exponentiation is a mathematical operation involving two numbers: the base (b) and the exponent (n), written as bⁿ. It represents repeated multiplication of the base:
+- bⁿ = b × b × ... × b (n times when n is a positive integer)
+
+Key properties:
+1. **Laws of exponents**:
+   - bᵐ × bⁿ = bᵐ⁺ⁿ
+   - (bᵐ)ⁿ = bᵐⁿ
+   - (b × c)ⁿ = bⁿ × cⁿ
+2. **Special cases**:
+   - b⁰ = 1 (for b ≠ 0)
+   - b¹ = b
+   - b⁻ⁿ = 1/bⁿ
+
+Extensions to other number types:
+- **Negative exponents**: Represent reciprocals
+- **Fractional exponents**: Represent roots (b^(1/n) = √ⁿb)
+- **Real exponents**: Defined using limits and logarithms
+- **Complex exponents**: Defined using Euler's formula
+
+Applications include:
+- **Compound interest**: Financial calculations with exponential growth
+- **Population modeling**: Biological and ecological growth models
+- **Physics**: Wave functions, decay processes, and inverse square laws
+- **Computer science**: Algorithm complexity analysis and cryptographic functions
+- **Engineering**: Signal processing and control systems
+
+Implementation considerations:
+- **Efficiency**: Exponentiation by squaring provides O(log n) algorithms
+- **Precision**: Floating-point arithmetic can introduce rounding errors
+- **Domain restrictions**: Negative bases with fractional exponents may be undefined in real numbers
+
+In programming:
+```python
+# Using built-in operators
+result = base ** exponent
+# or
+result = pow(base, exponent)
+```

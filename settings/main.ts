@@ -10,20 +10,19 @@ export const description =
 export const keywords = [
   "Next.js",
   "documentation",
-  "Rubix Studios",
   "open source",
   "SEO",
 ]
 export const urlimage = "/images/og-image.png"
-export const imagealt = "Rubix Studios Documentation"
-export const twitterhandle = "@RubixStudios"
+export const imagealt = "Documentation Template"
+export const twitterhandle = "@t4zn"
 
-export const companyname = "Rubix Studios"
-export const companylink = "https://rubixstudios.com.au"
+export const companyname = "t4zn"
+export const companylink = "https://github.com/t4zn/taizun"
 
 export const branding = true
 export const rightsidebar = true
-export const feedbackedit = true
+export const feedbackedit = false
 export const tableofcontent = true
 export const totopscroll = true
 

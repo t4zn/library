@@ -1,0 +1,54 @@
+---
+title: Uppercase
+description: Convert a string to uppercase.
+---
+
+## Overview
+
+The uppercase function converts all alphabetic characters in a string to their uppercase equivalents. This operation is commonly used for emphasis, acronyms, and standardized text formatting.
+
+## Usage
+
+```python
+from taizun import uppercase
+uppercase_string = "hello"
+result = uppercase(uppercase_string)
+print(result)
+```
+
+## Theory
+
+Uppercase conversion transforms alphabetic characters to their capital letter forms. This operation is the inverse of lowercase conversion and follows language-specific rules for character mapping.
+
+Key properties:
+1. **Idempotence**: Applying uppercase twice yields the same result as applying it once
+2. **Character preservation**: Non-alphabetic characters remain unchanged
+3. **Length preservation**: The output string has the same length as the input
+
+Unicode complexities:
+- **Simple mappings**: Direct one-to-one character conversions (A-Z, a-z)
+- **Expansion mappings**: Some lowercase characters map to multiple uppercase characters
+- **Language-specific rules**: German ß becomes SS, Turkish i/İ handling
+- **Special cases**: Ligatures and composed characters may require special treatment
+
+Applications include:
+- **Emphasis formatting**: Making text stand out in user interfaces
+- **Acronym creation**: Standardizing abbreviations and initialisms
+- **Data entry standardization**: Consistent formatting for codes and identifiers
+- **Title formatting**: Creating headers and section titles
+- **Accessibility**: Improving readability for users with certain visual impairments
+- **Protocol compliance**: Meeting requirements for specific data formats
+
+Implementation considerations:
+- **Performance optimization**: Efficient algorithms for large text processing
+- **Memory management**: In-place vs. new string creation strategies
+- **Unicode compliance**: Proper handling of international character sets
+- **Locale sensitivity**: Respecting language-specific conversion rules
+
+In programming:
+```python
+# Built-in methods
+uppercased = text.upper()
+# Locale-sensitive versions
+uppercased = text.uppercase(locale)
+```

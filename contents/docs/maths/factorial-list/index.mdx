@@ -1,0 +1,55 @@
+---
+title: Factorial List
+description: Calculate the factorial of each number in a list.
+---
+
+## Overview
+
+The factorial list function applies the factorial operation to each element in a collection of numbers, returning a new list with the factorial values. This vectorized operation is useful for batch processing mathematical computations.
+
+## Usage
+
+```python
+from taizun import factorial_list
+factorial_nums = [3, 4, 5]
+result = factorial_list(factorial_nums)
+print(result)
+```
+
+## Theory
+
+The factorial list operation extends the scalar factorial function to operate on collections, applying f(n) = n! to each element. This represents a mapping operation in functional programming terms.
+
+Key considerations:
+1. **Element-wise operation**: Each input element is processed independently
+2. **Domain restrictions**: Factorials are only defined for non-negative integers
+3. **Growth characteristics**: Output values grow extremely rapidly
+4. **Memory usage**: Results may require larger data types than inputs
+
+Mathematical properties:
+- **Injectivity**: The factorial function is strictly increasing for n ≥ 1
+- **Combinatorial interpretation**: Each result represents arrangements of n objects
+- **Sequence generation**: Creates the factorial number sequence [1!, 2!, 3!, ...]
+
+Applications include:
+- **Combinatorics**: Calculating permutations for multiple set sizes
+- **Probability**: Computing coefficients in binomial and multinomial distributions
+- **Algorithm analysis**: Determining complexity bounds for recursive algorithms
+- **Mathematical research**: Generating sequences for number theory investigations
+- **Statistical physics**: Computing partition functions and state counts
+
+Implementation considerations:
+- **Overflow handling**: Rapid growth requires careful data type selection
+- **Caching**: Precomputed values can improve performance for repeated calculations
+- **Validation**: Input checking for negative or non-integer values
+- **Parallelization**: Independent calculations can be distributed across threads
+
+In programming:
+```python
+# Using list comprehension
+def factorial_list(numbers):
+    return [factorial(n) for n in numbers]
+# or map function
+def factorial_list(numbers):
+    return list(map(factorial, numbers))
+```

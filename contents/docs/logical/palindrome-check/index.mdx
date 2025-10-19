@@ -1,0 +1,63 @@
+---
+title: Palindrome Check
+description: Check if a string is a palindrome.
+---
+
+## Overview
+
+The palindrome check function determines whether a string reads the same forwards and backwards. This logical operation is commonly used in string analysis and recreational programming challenges.
+
+## Usage
+
+```python
+from taizun import is_palindrome
+palindrome_string = "madam"
+result = is_palindrome(palindrome_string)
+print(result)
+```
+
+## Theory
+
+A palindrome is a sequence of characters that remains identical when reversed. This property can be checked by comparing a string with its reverse or by using two pointers approaching from opposite ends.
+
+Algorithmic approaches:
+1. **Reversal comparison**: Compare original string with its reverse
+2. **Two-pointer technique**: Compare characters from both ends moving inward
+3. **Recursive approach**: Check outer characters and recurse on inner substring
+4. **Stack-based**: Push first half onto stack, compare with second half
+
+Variations and considerations:
+- **Case sensitivity**: Whether to ignore case differences
+- **Whitespace handling**: Whether to ignore spaces and punctuation
+- **Character set**: Supporting Unicode and international characters
+- **Performance**: O(n) time complexity is optimal for this operation
+
+Applications include:
+- **Algorithm challenges**: Common interview questions and coding competitions
+- **Data validation**: Checking formatted codes and identifiers
+- **Bioinformatics**: Analyzing DNA sequences and genetic markers
+- **Cryptography**: Simple cipher analysis and pattern recognition
+- **Text processing**: Identifying symmetric patterns in documents
+- **Game development**: Word games and puzzle mechanics
+
+Implementation considerations:
+- **Edge cases**: Empty strings, single characters, and special characters
+- **Efficiency**: Early termination when mismatch is found
+- **Memory usage**: In-place vs. additional storage requirements
+- **Unicode compliance**: Proper handling of combining characters and bidirectional text
+
+In programming:
+```python
+# Simple approach
+def is_palindrome(s):
+    return s == s[::-1]
+# Two-pointer approach
+def is_palindrome(s):
+    left, right = 0, len(s) - 1
+    while left < right:
+        if s[left] != s[right]:
+            return False
+        left += 1
+        right -= 1
+    return True
+```

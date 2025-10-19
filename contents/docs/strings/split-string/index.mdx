@@ -1,0 +1,57 @@
+---
+title: Split String
+description: Split a string into a list of substrings.
+---
+
+## Overview
+
+The split string function divides a string into multiple substrings based on a specified delimiter, returning a list of the resulting pieces. This operation is fundamental for parsing structured text data.
+
+## Usage
+
+```python
+from taizun import split_string
+split_string_input = "Hello World"
+result = split_string(split_string_input)
+print(result)
+```
+
+## Theory
+
+String splitting is the inverse of joining operations, breaking a continuous string into discrete components based on separator characters or patterns.
+
+Key parameters:
+1. **Delimiter**: Character or string that marks boundaries between parts
+2. **Maximum splits**: Limit on the number of divisions to perform
+3. **Behavior flags**: Options for handling empty parts and edge cases
+
+Common splitting patterns:
+- **Whitespace splitting**: Dividing on spaces, tabs, and line breaks
+- **Character splitting**: Using specific characters like commas or semicolons
+- **Pattern splitting**: Using regular expressions for complex delimiters
+- **Fixed-width splitting**: Dividing at specific positions regardless of content
+
+Applications include:
+- **CSV processing**: Parsing comma-separated values into data structures
+- **Command parsing**: Breaking user input into commands and arguments
+- **Path manipulation**: Separating directory components in file paths
+- **Data extraction**: Isolating fields from structured text formats
+- **Natural language processing**: Tokenizing sentences into words
+- **Configuration parsing**: Processing key-value pairs and settings
+
+Implementation considerations:
+- **Edge cases**: Handling empty strings, missing delimiters, and consecutive separators
+- **Performance**: Efficient algorithms for large text processing
+- **Memory usage**: Managing the creation of multiple substring objects
+- **Unicode support**: Proper handling of international characters and combining marks
+
+In programming:
+```python
+# Basic splitting
+parts = text.split()           # Split on whitespace
+parts = text.split(",")        # Split on comma
+parts = text.split(",", 2)     # Limit to 2 splits
+# Advanced splitting
+parts = text.splitlines()      # Split on line boundaries
+parts = re.split(pattern, text)  # Split using regular expressions
+```

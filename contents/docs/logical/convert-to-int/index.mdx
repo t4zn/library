@@ -1,0 +1,66 @@
+---
+title: Convert to Int
+description: Convert a string to an integer.
+---
+
+## Overview
+
+The convert to int function parses a string representation of a number and returns its integer value. This essential operation bridges text-based input with numerical computation.
+
+## Usage
+
+```python
+from taizun import convert_to_int
+int_string = "123"
+result = convert_to_int(int_string)
+print(result)
+```
+
+## Theory
+
+String-to-integer conversion involves interpreting character sequences as numerical values according to positional notation systems, typically base-10 decimal representation.
+
+Key components:
+1. **Parsing**: Analyzing character sequence structure
+2. **Validation**: Ensuring input represents a valid number
+3. **Conversion**: Transforming digit characters to numerical values
+4. **Sign handling**: Processing positive and negative indicators
+
+Algorithmic approaches:
+1. **Character-by-character**: Process each digit and accumulate value
+2. **Built-in functions**: Language-specific parsing functions
+3. **Regular expressions**: Validate format before conversion
+4. **State machines**: Handle complex number formats
+
+Error handling considerations:
+- **Invalid characters**: Non-numeric characters in the string
+- **Overflow**: Numbers exceeding integer range limits
+- **Empty strings**: Handling zero-length input
+- **Whitespace**: Leading/trailing spaces and formatting characters
+- **Radix variations**: Different number bases (binary, hexadecimal)
+
+Applications include:
+- **User input processing**: Converting form data to numerical values
+- **File parsing**: Reading numeric data from text files
+- **Configuration processing**: Interpreting numeric settings
+- **Data interchange**: Processing JSON, XML, and other text formats
+- **Command-line arguments**: Converting program parameters
+- **Database interfaces**: Handling text-based numeric storage
+
+Implementation considerations:
+- **Performance**: Efficient algorithms for high-frequency conversions
+- **Robustness**: Graceful handling of malformed input
+- **Localization**: Supporting different number formats and locales
+- **Type safety**: Ensuring appropriate data type handling
+
+In programming:
+```python
+# Built-in conversion
+number = int(string)
+# Manual implementation
+def convert_to_int(s):
+    result = 0
+    for char in s:
+        result = result * 10 + (ord(char) - ord('0'))
+    return result
+```

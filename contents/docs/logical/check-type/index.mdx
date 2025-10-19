@@ -1,0 +1,57 @@
+---
+title: Check Type
+description: Determine the data type of a value.
+---
+
+## Overview
+
+The check type function identifies and returns the data type classification of a given value. This introspection operation is essential for dynamic type checking and conditional processing in programming.
+
+## Usage
+
+```python
+from taizun import check_type
+value = 10
+result = check_type(value)
+print(result)
+```
+
+## Theory
+
+Type checking is a fundamental operation in programming that determines the category or class of a value according to the type system of the language. This enables conditional behavior based on data characteristics.
+
+Type categories typically include:
+1. **Primitive types**: int, float, bool, str, etc.
+2. **Composite types**: list, dict, tuple, set, etc.
+3. **Custom types**: User-defined classes and structures
+4. **Special types**: None, function, module, etc.
+
+Implementation approaches:
+1. **Built-in functions**: Language-specific type inspection functions
+2. **Reflection APIs**: Runtime type information systems
+3. **Pattern matching**: Modern language constructs for type discrimination
+4. **Manual checking**: Explicit isinstance or type comparisons
+
+Applications include:
+- **Dynamic dispatch**: Executing different code paths based on type
+- **Data validation**: Ensuring inputs match expected types
+- **Serialization**: Converting values to appropriate string representations
+- **Debugging**: Inspecting variable types during development
+- **Generic programming**: Writing functions that work with multiple types
+- **Error handling**: Providing type-specific error messages
+
+Considerations in type systems:
+- **Static vs. dynamic**: Compile-time vs. runtime type checking
+- **Strong vs. weak**: Enforcement of type constraints
+- **Nominal vs. structural**: Name-based vs. structure-based type equivalence
+- **Type hierarchies**: Inheritance and interface relationships
+
+In programming:
+```python
+# Python examples
+type(value).__name__          # Get type name
+isinstance(value, int)        # Check specific type
+isinstance(value, (int, float))  # Check multiple types
+```
+
+Type checking is crucial for writing robust, maintainable code that handles different data types appropriately while preventing type-related errors.

@@ -1,0 +1,58 @@
+---
+title: Capitalize
+description: Capitalize the first letter of a string.
+---
+
+## Overview
+
+The capitalize function converts the first character of a string to uppercase while converting all other characters to lowercase. This operation is commonly used for formatting titles, names, and proper nouns.
+
+## Usage
+
+```python
+from taizun import capitalize
+capitalize_string = "hello"
+result = capitalize(capitalize_string)
+print(result)
+```
+
+## Theory
+
+String capitalization is a text formatting operation that follows specific linguistic conventions. The standard capitalize function implements title case for the first word of a sentence or phrase.
+
+Capitalization rules:
+1. **First character**: Convert to uppercase
+2. **Remaining characters**: Convert to lowercase
+3. **Non-alphabetic characters**: Remain unchanged
+4. **Empty strings**: Return unchanged
+
+Types of capitalization:
+- **Sentence case**: First letter of sentence capitalized
+- **Title case**: First letter of major words capitalized
+- **Upper case**: All letters capitalized
+- **Lower case**: All letters in lowercase
+
+Applications include:
+- **User interfaces**: Properly formatted display text
+- **Data cleaning**: Standardizing text input from users
+- **Document processing**: Formatting headings and titles
+- **Database normalization**: Consistent storage of names and labels
+- **Natural language processing**: Preprocessing for text analysis
+- **Report generation**: Professional document formatting
+
+Implementation considerations:
+- **Unicode support**: Handling international characters and diacritics
+- **Locale sensitivity**: Different languages have different capitalization rules
+- **Performance**: Efficient implementation for high-frequency operations
+- **Edge cases**: Handling numbers, symbols, and empty strings
+
+In programming:
+```python
+# Built-in methods
+capitalized = text.capitalize()
+# Manual implementation
+def capitalize(text):
+    if not text:
+        return text
+    return text[0].upper() + text[1:].lower()
+```

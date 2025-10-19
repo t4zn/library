@@ -1,0 +1,55 @@
+---
+title: Join List
+description: Join a list of strings into a single string.
+---
+
+## Overview
+
+The join list function combines multiple strings into a single string with a specified separator between each element. This operation is the inverse of splitting and is essential for creating formatted output.
+
+## Usage
+
+```python
+from taizun import join_list
+string_list = ['Hello', 'World']
+result = join_list(string_list)
+print(result)
+```
+
+## Theory
+
+String joining is a fundamental operation that creates a single continuous string from a collection of substrings by inserting a separator between adjacent elements.
+
+Key parameters:
+1. **Separator**: String inserted between each pair of elements
+2. **Element list**: Collection of strings to be joined
+3. **Empty handling**: Behavior when the list is empty or contains empty strings
+
+Mathematical properties:
+- **Identity**: Joining with empty separator concatenates elements directly
+- **Associativity**: Joining nested structures follows predictable patterns
+- **Length calculation**: Result length = sum of element lengths + (n-1) × separator length
+
+Applications include:
+- **CSV generation**: Creating comma-separated data from arrays
+- **Path construction**: Building file paths from directory components
+- **Natural language**: Creating readable lists ("A, B, and C")
+- **Code generation**: Building programming constructs from components
+- **Report formatting**: Creating tabular data representations
+- **URL construction**: Building query strings and resource identifiers
+
+Implementation considerations:
+- **Performance**: Efficient algorithms for large collections
+- **Memory management**: Minimizing intermediate string objects
+- **Type handling**: Converting non-string elements to strings
+- **Unicode support**: Proper handling of international characters
+
+In programming:
+```python
+# Built-in methods
+result = separator.join(string_list)
+# Examples
+csv_line = ",".join(["A", "B", "C"])
+path = "/".join(["home", "user", "documents"])
+sentence = " ".join(["Hello", "World"])
+```

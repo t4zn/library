@@ -1,0 +1,54 @@
+---
+title: Min Value
+description: Find the minimum value between two numbers.
+---
+
+## Overview
+
+The min value function compares two numbers and returns the smaller of the two. This fundamental operation is essential in algorithms, optimization, and data analysis.
+
+## Usage
+
+```python
+from taizun import min_val
+min_num, max_num = 5, 10
+result = min_val(min_num, max_num)
+print(result)
+```
+
+## Theory
+
+The minimum function is a basic comparison operation that determines the lesser of two values according to a defined ordering. For real numbers, this corresponds to the standard numerical ordering.
+
+Key properties:
+1. **Commutativity**: min(a, b) = min(b, a)
+2. **Associativity**: min(a, min(b, c)) = min(min(a, b), c)
+3. **Idempotence**: min(a, a) = a
+4. **Identity**: min(a, ∞) = a (where ∞ represents positive infinity)
+
+Generalizations:
+- **Multiple values**: The minimum of a set of values is the smallest element
+- **Functions**: Pointwise minimum of functions: min(f(x), g(x))
+- **Vectors**: Component-wise minimum operations
+- **Sets**: The infimum (greatest lower bound) generalizes minimum to infinite sets
+
+Applications include:
+- **Algorithm design**: Finding minimum elements in arrays and data structures
+- **Optimization**: Objective functions often seek to minimize cost or error
+- **Graphics**: Clamping values to minimum bounds
+- **Statistics**: Determining the range and outliers in datasets
+- **Game theory**: Minimax algorithms for decision making
+- **Control systems**: Saturation functions that enforce minimum limits
+
+Implementation considerations:
+- **Data types**: Handling different numeric types (integers, floats, complex numbers)
+- **Special values**: Behavior with NaN, infinity, and negative zero
+- **Performance**: Branchless implementations using bit manipulation for critical code paths
+
+In programming:
+```python
+# Built-in functions
+result = min(a, b)
+# or conditional expressions
+result = a if a < b else b
+```

@@ -1,0 +1,35 @@
+---
+title: Named Entity Recognition
+description: Identify entities like people, locations, and organizations in text.
+---
+
+## Overview
+
+Named Entity Recognition (NER) is a subtask of information extraction that seeks to locate and classify named entities mentioned in unstructured text into pre-defined categories such as person names, organizations, locations, medical codes, time expressions, quantities, monetary values, percentages, etc.
+
+## Usage
+
+```python
+from taizun import named_entity_recognition
+entities = named_entity_recognition("Barack Obama was the 44th President of the United States.")
+print(entities)
+```
+
+## Theory
+
+NER is typically modeled as a sequence labeling task where each token (word) in a sentence is assigned a label from a predefined set of entity types. Common approaches include:
+
+1. **Rule-based systems**: Use handcrafted rules and patterns, often combined with dictionaries and gazetteers.
+
+2. **Machine learning models**: Feature-based classifiers like Conditional Random Fields (CRFs) that consider contextual features of words.
+
+3. **Deep learning models**: Neural architectures like BiLSTM-CRF or transformer-based models (BERT, RoBERTa) that can capture complex linguistic patterns.
+
+Modern NER systems achieve high accuracy by combining multiple approaches and leveraging large annotated datasets. The performance often depends on the domain and language of the text being processed.
+
+## Challenges in NER
+
+1. **Ambiguity**: Words can have multiple meanings depending on context
+2. **Domain Specificity**: Entities vary across domains (medical, legal, financial)
+3. **Language Variations**: Handling different languages and writing systems
+4. **Nested Entities**: Entities contained within other entities

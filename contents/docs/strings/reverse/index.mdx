@@ -1,0 +1,54 @@
+---
+title: Reverse
+description: Reverse a string.
+---
+
+## Overview
+
+The reverse function takes a string and returns a new string with the characters in reverse order. This operation is fundamental in text processing and string manipulation algorithms.
+
+## Usage
+
+```python
+from taizun import reverse
+text_input = "hello"
+result = reverse(text_input)
+print(result)
+```
+
+## Theory
+
+String reversal is a basic operation that inverts the order of characters in a sequence. For a string of length n with characters at positions 0, 1, 2, ..., n-1, the reversed string has characters at positions n-1, n-2, ..., 1, 0.
+
+Key properties:
+1. **Involution**: Reversing a string twice returns the original string
+2. **Length preservation**: The reversed string has the same length as the original
+3. **Character preservation**: All characters are preserved, only their order changes
+
+Algorithmic approaches:
+1. **Two-pointer method**: Swap characters from both ends moving toward the center
+2. **Stack-based**: Push all characters onto a stack, then pop them off
+3. **Recursion**: Reverse the substring excluding first character, then append first character
+4. **Built-in functions**: Most programming languages provide optimized reversal functions
+
+Applications include:
+- **Palindrome detection**: Checking if a string equals its reverse
+- **Text processing**: Formatting and data transformation
+- **Cryptography**: Simple character scrambling operations
+- **Algorithm problems**: Common interview questions and coding challenges
+- **Bioinformatics**: DNA sequence analysis (complementary sequences)
+- **User interfaces**: Text display in right-to-left languages
+
+Implementation considerations:
+- **Unicode handling**: Proper handling of multi-byte characters and combining marks
+- **Memory efficiency**: In-place vs. new string creation
+- **Performance**: O(n) time complexity is optimal for this operation
+- **Immutability**: String reversal in languages with immutable strings creates new objects
+
+In programming:
+```python
+# Python slicing
+reversed_string = original[::-1]
+# or built-in function
+reversed_string = ''.join(reversed(original))
+```

@@ -1,0 +1,28 @@
+---
+title: Classify Image
+description: Classify an image using a Vision Transformer (ViT) model.
+---
+
+## Overview
+
+Image classification is the task of assigning a label or category to an entire image. This fundamental computer vision task is used in many applications, from medical imaging to autonomous vehicles.
+
+## Usage
+
+```python
+from taizun import classify_image
+label = classify_image("path/to/image.jpg")
+print(label)
+```
+
+## Theory
+
+Image classification involves training a model to recognize specific patterns and features in images that correspond to different classes or categories. The main approaches include:
+
+1. **Traditional Methods**: Early approaches used handcrafted features like SIFT, HOG, or color histograms combined with classifiers like SVM or Random Forest.
+
+2. **Deep Learning**: Modern approaches use convolutional neural networks (CNNs) that automatically learn relevant features from raw pixel data. Architectures like ResNet, DenseNet, and EfficientNet have achieved remarkable performance.
+
+3. **Vision Transformers**: Recent advances use transformer architectures adapted for vision tasks. Vision Transformers (ViT) divide images into patches and process them with self-attention mechanisms, often achieving state-of-the-art results.
+
+The training process requires a large dataset of labeled images. Data augmentation techniques like rotation, scaling, and color adjustments are often used to improve model generalization. Transfer learning, where a pre-trained model is fine-tuned on a specific task, is commonly used to achieve good results with limited data.

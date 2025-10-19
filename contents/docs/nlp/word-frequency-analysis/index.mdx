@@ -1,0 +1,37 @@
+---
+title: Word Frequency Analysis
+description: Analyze the frequency of words in a text.
+---
+
+## Overview
+
+Word frequency analysis is the process of counting how often each word appears in a text document. This technique is fundamental in text mining and helps identify the most important terms in a document.
+
+## Usage
+
+```python
+from taizun import word_frequency_analysis
+frequency = word_frequency_analysis("This is a test. This test is only a test.")
+print(frequency)
+```
+
+## Theory
+
+Word frequency analysis is based on the principle that important words in a document will appear more frequently than less important ones. The process involves:
+
+1. **Tokenization**: Breaking the text into individual words or tokens.
+
+2. **Normalization**: Converting words to a standard form (lowercase, stemming) to ensure consistent counting.
+
+3. **Counting**: Maintaining a frequency count for each unique word.
+
+4. **Analysis**: Interpreting the results to identify key terms, patterns, or topics.
+
+This technique is used in various applications including:
+- Keyword extraction for search engines
+- Text summarization
+- Authorship attribution
+- Language modeling
+- Information retrieval
+
+Advanced approaches may consider n-grams (sequences of n words) rather than just individual words, and may apply weighting schemes like TF-IDF (Term Frequency-Inverse Document Frequency) to better reflect word importance.
