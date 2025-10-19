@@ -50,9 +50,9 @@ export const Documents: Paths[] = [
     spacer: true,
   },
   {
-    title: "NLP Functions",
+    title: "Natural Language Processing",
     href: "/nlp",
-    heading: "Function Reference",
+    heading: "Features",
     items: [
       {
         title: "Text Summarization",

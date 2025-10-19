@@ -1,24 +1,44 @@
 ---
 title: Changelog
-description: Changelogs and improvements to the Documents projects.
-keywords: ["changelog", "guide", "nextjs", "documents"]
+description: Changelogs and improvements to the Taizun library.
+keywords: ["changelog", "taizun", "python", "machine learning"]
 ---
 
 ## Added
-**Linting and Formatting**:
-  - Added `pnpm run lint` and `pnpm run lint:fix` scripts to automate linting tasks.
-  - Added `pnpm run format` and `pnpm run format:check` scripts to ensure consistent code formatting.
+**Core Functionality**:
+  - Added `tz.summarize()` for text summarization
+  - Added `tz.moodscan()` for sentiment analysis
+  - Added `tz.labels()` for named entity recognition
+  - Added `tz.scrub()` for stopword removal
+  - Added `tz.wordcount()` for word frequency analysis
 
-**SEO Enhancements**:
-  - Added an SEO component to MDX pages to dynamically include `keywords` and `lastModified` metadata for improved SEO generation.
+**Computer Vision Functions**:
+  - Added `tz.imagecaption()` for image captioning
+  - Added `tz.classify_image()` for image classification
+  - Added `tz.spot()` for object detection
+  - Added `tz.resize_image()` for image resizing
+  - Added `tz.grayscale()` for grayscale conversion
+
+**Utility Functions**:
+  - Added mathematical operations (calculator, factorial, power, etc.)
+  - Added string processing functions (reverse, capitalize, concat, etc.)
+  - Added logical operations (palindrome check, prime check, etc.)
 
 ## Updated
-**Next.js Upgrade**:
-  - Upgraded the project from **Next.js 14** to **Next.js 15**, leveraging the latest features and performance improvements.
+**Documentation Improvements**:
+  - Completely redesigned documentation structure for better navigation
+  - Added comprehensive usage guides for all functions
+  - Added performance optimization tips
+  - Added best practices for text and image processing
 
-**Codebase Improvements**:
-  - Reordered imports across the project files for better consistency and readability.
+**API Refinements**:
+  - Simplified function names for better usability
+  - Improved error handling and validation
+  - Enhanced performance for batch processing
 
-**Mermaid Component**:
-  - Fixed an ID bug that caused rendering issues when multiple Mermaid diagrams were included in MDX pages.
-  - Improved initialization and rendering logic to prevent duplicate diagram rendering.
+## Fixed
+**Bug Fixes**:
+  - Resolved memory leaks in image processing functions
+  - Fixed accuracy issues in sentiment analysis
+  - Improved robustness of text preprocessing functions
+  - Enhanced error messages for better debugging
