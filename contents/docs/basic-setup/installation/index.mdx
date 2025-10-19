@@ -4,8 +4,6 @@ description: This guide covers the installation of Taizun and how to use it in y
 keywords: ["installation", "python", "guide", "taizun", "nlp", "computer vision"]
 ---
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ft4zn%2Ftaizun&project-name=taizun&repository-name=taizun&demo-title=Taizun&demo-description=Taizun%20is%20a%20Python%20library%20that%20simplifies%20machine%20learning%20tasks%20by%20providing%20utility%20functions%20for%20Natural%20Language%20Processing%20(NLP)%20and%20Computer%20Vision.&demo-url=https%3A%2F%2Ftaizun.vercel.app%2F&demo-image=https%3A%2F%2Fgithub.com%2Ft4zn%2Ftaizun%2Fblob%2Fmain%2Fpublic%2Fscreens%2Fscreen-1.png)
-
 ## Installation
 
 <Step>
@@ -46,11 +44,11 @@ import taizun as tz
 
 # Text summarization
 text = "Your long text here..."
-summary = tz.summarize_text(text)
+summary = tz.summarize(text)
 print(summary)
 
 # Sentiment analysis
-sentiment = tz.sentiment_analysis("I love this library!")
+sentiment = tz.moodscan("I love this library!")
 print(sentiment)
 ```
 
