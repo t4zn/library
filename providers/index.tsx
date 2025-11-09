@@ -1,13 +1,14 @@
-import { ThemeProvider } from "@/providers/theme"
+"use client"
 
-import { ViewTransitions } from "@/lib/transition"
+import {
+  ThemeProvider as NextThemesProvider,
+  ThemeProviderProps,
+} from "next-themes"
 
-export const Providers: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <ViewTransitions>{children}</ViewTransitions>
-    </ThemeProvider>
+    <NextThemesProvider {...props}>
+      {children}
+    </NextThemesProvider>
   )
 }
